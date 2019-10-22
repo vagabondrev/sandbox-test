@@ -1,0 +1,21 @@
+openapi: 3.0.0
+info:
+  title: person
+  version: '1.0'
+  description: ''
+servers:
+  - url: 'http://localhost:3000/person'
+paths:
+  '/person/{id}':
+    parameters:
+      - type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses: {}
+components:
+  schemas: {}
+  securitySchemes: {}

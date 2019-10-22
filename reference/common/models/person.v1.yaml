@@ -1,0 +1,12 @@
+title: Person
+type: object
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  address:
+    type: string
+  phone:
+    type: string
+x-examples: {}
