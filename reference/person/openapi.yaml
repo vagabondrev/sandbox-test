@@ -6,16 +6,31 @@ info:
 servers:
   - url: 'http://localhost:3000/person'
 paths:
-  '/person/{id}':
-    parameters:
-      - type: string
-        name: id
-        in: path
-        required: true
+  /person:
+    parameters: []
     get:
       summary: Your GET endpoint
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  '':
+                    type: string
+      description: ''
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+        description: ''
 components:
   schemas: {}
   securitySchemes: {}
