@@ -1,0 +1,1038 @@
+swagger: '2.0'
+info:
+  description: "API's for RFID reader configuration and management, including device and cloud settings, GPIO, and device health."
+  version: 1.0.0
+  title: RFID Reader Management
+tags:
+  - name: actions
+    description: Reader device commands
+  - name: gpio
+    description: General purpose input/output commands and subscriptions
+  - name: read settings
+    description: RFID read configuration operations
+  - name: device settings
+    description: Device configuration operations
+  - name: cloud settings
+    description: Cloud configuration operations
+  - name: device health
+    description: Reader health status webhook subscriptions
+paths:
+  '/{readerSn}/actions/restart':
+    put:
+      tags:
+        - actions
+      summary: Restart an RFID reader.
+      operationId: restart reader
+      description: Restarts the reader with the serial number provided.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: readerSn
+          description: The RFID reader serial number
+          required: true
+          type: string
+      responses:
+        '202':
+          description: Accepted
+          headers:
+            Location:
+              type: string
+              description: A URL that will provide a status of the restart.
+        '400':
+          description: Bad Request
+          schema:
+            type: object
+            properties: {}
+  '/{readerSn}/gpo':
+    put:
+      tags:
+        - gpio
+      summary: Send a GPO signal to the reader.
+      operationId: gpo signal
+      description: Send a GPO signal to the specified port of the reader.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: readerSn
+          description: The RFID reader serial number
+          required: true
+          type: string
+        - in: query
+          name: port
+          description: The GPO port ID
+          required: true
+          type: integer
+        - in: query
+          name: state
+          description: The GPO state signal to send
+          required: true
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Command Successful
+            type: string
+            default: Command Successful
+            example: Command Successful
+  /gpi:
+    get:
+      tags:
+        - gpio
+      summary: Gets a list of reader GPI subscriptions that match the search criteria
+      operationId: gpi subscriptions
+      produces:
+        - application/json
+      parameters:
+        - name: search_criteria
+          in: query
+          description: "A list of search criteria using known subscription properties. \r\n\r\n Example: <b>?name=MyEvents&active=true</b>"
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/subscriptionPage'
+    post:
+      tags:
+        - gpio
+      summary: Creates a reader GPI subscription
+      operationId: new gpi subscription
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              type: string
+              description: the URL of the subscription
+      parameters:
+        - name: subscription
+          in: body
+          description: Details of the new subscription
+          required: true
+          schema:
+            type: string
+  '/gpi/{id}':
+    get:
+      tags:
+        - gpio
+      summary: Gets a reader GPI subscription
+      operationId: gpi subscription
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          description: The subscription ID
+          required: true
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/subscription'
+    put:
+      tags:
+        - gpio
+      summary: Changes a GPI subscription
+      operationId: change gpi subscription
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          description: The subscription ID
+          required: true
+        - name: subscription
+          in: body
+          description: The subscription data
+          required: true
+          schema:
+            $ref: '#/definitions/subscription'
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Change Successful
+            type: string
+            default: Change Successful
+            example: Change Successful
+    delete:
+      tags:
+        - gpio
+      summary: Removes a reader GPI subscription
+      operationId: remove gpi subscription
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          description: The subscription ID
+          required: true
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Delete Successful
+            type: string
+            default: Delete Successful
+            example: Delete Successful
+  '/{readerSn}/actions/led':
+    put:
+      tags:
+        - actions
+      summary: Send an LED command to the reader.
+      operationId: led command
+      description: Send an LED command to the specified reader.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: readerSn
+          description: The RFID reader serial number
+          required: true
+          type: string
+        - in: query
+          name: color
+          description: 'The color of the LED (1 = red, 2 = yellow, 3 = green)'
+          required: true
+          type: integer
+        - in: query
+          name: seconds
+          description: The time to change the LED color in seconds
+          required: true
+          type: integer
+        - in: query
+          name: flash
+          description: A value indicating whether to flash the LED
+          required: false
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Command Successful
+            type: string
+            default: Command Successful
+            example: Command Successful
+  '/{readerSn}/eventmode':
+    put:
+      tags:
+        - read settings
+      summary: Sets the read mode of the device.
+      operationId: set event mode
+      parameters:
+        - in: path
+          name: readerSn
+          description: The RFID reader serial number
+          required: true
+          type: string
+        - name: eventMode
+          in: body
+          description: Details of the event mode
+          required: true
+          schema:
+            $ref: '#/definitions/readerEventMode'
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Change Successful
+            type: string
+            default: Change Successful
+            example: Change Successful
+  '/{readerSn}/session/{sessionId}':
+    put:
+      tags:
+        - read settings
+      summary: Set the session configuration on the reader.
+      operationId: set session configuration
+      description: Sets the session configuration on the reader.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: readerSn
+          description: The RFID reader serial number
+          required: true
+          type: string
+        - in: path
+          name: sessionId
+          description: 'The session configuration to apply (0, 1, 2, 3)'
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Command Successful
+            type: string
+            default: Command Successful
+            example: Command Successful
+  '/{readerSn}/filter':
+    put:
+      tags:
+        - read settings
+      summary: Creates a read filter
+      operationId: set read filter
+      parameters:
+        - in: path
+          name: readerSn
+          description: The RFID reader serial number
+          required: true
+          type: string
+        - name: subscription
+          in: body
+          description: Details of the filter
+          required: true
+          schema:
+            $ref: '#/definitions/readFilter'
+      responses:
+        '201':
+          description: Change Successful
+          schema:
+            type: string
+            default: Change Successful
+            example: Change Successful
+  '/{readerSn}/antenna/{antennaId}':
+    put:
+      tags:
+        - read settings
+      summary: Configures a reader antenna
+      operationId: set antenna configuration
+      parameters:
+        - in: path
+          name: readerSn
+          description: The RFID reader serial number
+          required: true
+          type: string
+        - in: path
+          name: antennaId
+          description: The antenna id number
+          required: true
+          type: integer
+        - name: subscription
+          in: body
+          description: Details of the filter
+          required: true
+          schema:
+            $ref: '#/definitions/readFilter'
+      responses:
+        '200':
+          description: Change Successful
+          schema:
+            type: string
+            default: Change Successful
+            example: Change Successful
+  '/{readerSn}/settings/device':
+    get:
+      tags:
+        - device settings
+      summary: Change reader configuration info.
+      operationId: device settings
+      description: Updates RFID reader configuration for the reader serial number provided.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: readerSn
+          description: The RFID reader serial number
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/readerConfig'
+    put:
+      tags:
+        - device settings
+      summary: Get reader configuration info.
+      operationId: set device settings
+      description: Retrieves RFID reader configuration for the reader serial number provided.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: readerSn
+          description: The RFID reader serial number
+          required: true
+          type: string
+        - name: configuration
+          in: body
+          description: Details of the reader configuration
+          required: true
+          schema:
+            $ref: '#/definitions/readerConfig'
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Change Successful
+            type: string
+            default: Change Successful
+            example: Change Successful
+  '/{readerSn}/settings/cloud':
+    get:
+      tags:
+        - cloud settings
+      summary: Change reader configuration info.
+      operationId: cloud settings
+      description: Updates RFID reader configuration for the reader serial number provided.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: readerSn
+          description: The RFID reader serial number
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/cloudConfig'
+    put:
+      tags:
+        - cloud settings
+      summary: Get reader configuration info.
+      operationId: set cloud settings
+      description: Retrieves RFID reader configuration for the reader serial number provided.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: readerSn
+          description: The RFID reader serial number
+          required: true
+          type: string
+        - name: configuration
+          in: body
+          description: Details of the reader configuration
+          required: true
+          schema:
+            $ref: '#/definitions/cloudConfig'
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Change Successful
+            type: string
+            default: Change Successful
+            example: Change Successful
+  /health:
+    get:
+      tags:
+        - device health
+      summary: Gets a list of reader health event subscriptions that match the search criteria.
+      operationId: health subscriptions
+      produces:
+        - application/json
+      parameters:
+        - name: search_criteria
+          in: query
+          description: "A list of search criteria using known subscription properties. \r\n\r\n Example: <b>?name=MyEvents&active=true</b>"
+          required: false
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/subscriptionPage'
+    post:
+      tags:
+        - device health
+      summary: Creates a reader health event subscription
+      operationId: new health subscription
+      parameters:
+        - name: subscription
+          in: body
+          description: Details of the new subscription
+          required: true
+          schema:
+            $ref: '#/definitions/subscriptionPage'
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              type: string
+              description: the URL of the subscription
+  '/health/{id}':
+    get:
+      tags:
+        - device health
+      summary: Gets a reader health event subscription
+      operationId: health subscription
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          description: The subscription ID
+          required: true
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/subscriptionPage'
+    put:
+      tags:
+        - device health
+      summary: Changes a reader health event subscription
+      operationId: change health subscription
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          description: The subscription ID
+          required: true
+        - name: subscription
+          in: body
+          description: The subscription data
+          required: true
+          schema:
+            $ref: '#/definitions/subscriptionPage'
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Change Successful
+            type: string
+            default: Change Successful
+            example: Change Successful
+    delete:
+      tags:
+        - device health
+      summary: Removes a reader health event subscription
+      operationId: remove health subscription
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          description: The subscription ID
+          required: true
+      responses:
+        '200':
+          description: OK
+          schema:
+            description: Delete Successful
+            type: string
+            default: Delete Successful
+            example: Delete Successful
+definitions:
+  readFilter:
+    type: object
+    properties:
+      Operation:
+        type: string
+        example: ABC123
+        enum:
+          - include
+          - exclude
+      FilterRegex:
+        type: string
+        example: ABC123
+  readInterval:
+    type: object
+    properties:
+      interval:
+        type: integer
+        example: 0
+      unit:
+        type: string
+        example: ABC123
+        enum:
+          - reads
+          - seconds
+          - minutes
+          - hours
+          - days
+  readerEventMode:
+    type: object
+    properties:
+      EventMode:
+        type: string
+        example: ABC123
+        enum:
+          - basic
+          - summaryBatch
+          - dwell
+          - transition
+      Settings:
+        type: object
+        properties:
+          RepeatReadInterval:
+            $ref: '#/definitions/readInterval'
+          Transition:
+            type: object
+            properties:
+              IngressLabel:
+                type: string
+                example: ABC123
+              EgressLabel:
+                type: string
+                example: ABC123
+              Directionality:
+                type: boolean
+                example: false
+          Dwell:
+            type: object
+            properties:
+              StartInterval:
+                $ref: '#/definitions/readInterval'
+              StopInterval:
+                $ref: '#/definitions/readInterval'
+  readerConfig:
+    type: object
+    properties:
+      Config:
+        type: object
+        properties:
+          AppVersion:
+            type: object
+            properties:
+              major:
+                type: string
+                example: ABC123
+              minor:
+                type: string
+                example: ABC123
+              build:
+                type: string
+                example: ABC123
+              maintenance:
+                type: string
+                example: ABC123
+          CommConfig:
+            type: object
+            properties:
+              EnabledStacks:
+                type: string
+                example: ABC123
+              DisableRAPktProcessing:
+                type: string
+                example: ABC123
+              EnableDHCPv6:
+                type: string
+                example: ABC123
+              IPv6StaticIPAddr:
+                type: string
+                example: ABC123
+              IPv6SubnetMask:
+                type: string
+                example: ABC123
+              IPv6StaticGateway:
+                type: string
+                example: ABC123
+              IPv6DNSIP:
+                type: string
+                example: ABC123
+              DHCP:
+                type: string
+                example: ABC123
+              IPAddr:
+                type: string
+                example: ABC123
+              Mask:
+                type: string
+                example: ABC123
+              Gateway:
+                type: string
+                example: ABC123
+              DNS:
+                type: string
+                example: ABC123
+              HttpRunning:
+                type: string
+                example: ABC123
+              TelnetActive:
+                type: string
+                example: ABC123
+              FtpActive:
+                type: string
+                example: ABC123
+              usbMode:
+                type: string
+                example: ABC123
+              WatchdogEnabled:
+                type: string
+                example: ABC123
+              SerialConTimeout:
+                type: string
+                example: ABC123
+              SNTP:
+                type: string
+                example: ABC123
+              sntpHostDisplayMode:
+                type: string
+                example: ABC123
+              llrpClientMode:
+                type: string
+                example: ABC123
+              llrpSecureMode:
+                type: string
+                example: ABC123
+              llrpSecureModeValidatePeer:
+                type: string
+                example: ABC123
+              llrpPort:
+                type: string
+                example: ABC123
+              llrpHostIP:
+                type: string
+                example: ABC123
+              allowllrpConnOverride:
+                type: string
+                example: ABC123
+          Bluetooth:
+            type: object
+            properties:
+              discoverable:
+                type: string
+                example: ABC123
+              pairable:
+                type: string
+                example: ABC123
+              PincodeEnabled:
+                type: string
+                example: ABC123
+              passkey:
+                type: string
+                example: ABC123
+              startIP:
+                type: string
+                example: ABC123
+              endIP:
+                type: string
+                example: ABC123
+          WirelessConfig:
+            type: object
+            properties:
+              essid:
+                type: string
+                example: ABC123
+              password:
+                type: string
+                example: ABC123
+              autoconnect:
+                type: string
+                example: ABC123
+          RegionConfig:
+            type: object
+            properties:
+              RFCountry:
+                type: string
+                example: ABC123
+              RFRegulatory:
+                type: string
+                example: ABC123
+              RFScanMode:
+                type: string
+                example: ABC123
+              LBTEnable:
+                type: string
+                example: ABC123
+              ChannelData:
+                type: string
+                example: ABC123
+          SnmpConfig:
+            type: object
+            properties:
+              snmpVersion:
+                type: string
+                example: ABC123
+              heartbeat:
+                type: string
+                example: ABC123
+          SyslogConfig:
+            type: object
+            properties:
+              RemoteIp:
+                type: string
+                example: ABC123
+              RemotePort:
+                type: string
+                example: ABC123
+              LogMinSeverity:
+                type: string
+                example: ABC123
+              ApplyFilter:
+                type: string
+                example: ABC123
+              MinimumSeverity:
+                type: string
+                example: ABC123
+              ProcessFilter:
+                type: string
+                example: ABC123
+          UserList:
+            type: object
+            properties:
+              User:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: ABC123
+                    PSWD:
+                      type: string
+                      example: ABC123
+          IPReader:
+            type: object
+            properties:
+              name:
+                type: string
+                example: ABC123
+              desc:
+                type: string
+                example: ABC123
+              flags:
+                type: string
+                example: ABC123
+              MonoStatic:
+                type: string
+                example: ABC123
+              CheckAntenna:
+                type: string
+                example: ABC123
+              gpiDebounceTime:
+                type: string
+                example: ABC123
+              gpioMapping:
+                type: string
+                example: ABC123
+              idleModeTimeOut:
+                type: string
+                example: ABC123
+              diagMode:
+                type: string
+                example: ABC123
+              extDiagMode:
+                type: string
+                example: ABC123
+              contact:
+                type: string
+                example: ABC123
+              PowerNegotiation:
+                type: string
+                example: ABC123
+              PowerNegotiationProtocol:
+                type: string
+                example: ABC123
+              allowGuestLogin:
+                type: string
+                example: ABC123
+              ReadPoint:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: ABC123
+                    flags:
+                      type: string
+                      example: ABC123
+                    CableLossPerHundredFt:
+                      type: string
+                      example: ABC123
+                    CableLength:
+                      type: string
+                      example: ABC123
+          SerialPortConf:
+            type: object
+            properties:
+              Mode:
+                type: string
+                example: ABC123
+              Baudrate:
+                type: string
+                example: ABC123
+              Databits:
+                type: string
+                example: ABC123
+              Parity:
+                type: string
+                example: ABC123
+              Stopbits:
+                type: string
+                example: ABC123
+              Flowcontrol:
+                type: string
+                example: ABC123
+              TagMetaData:
+                type: string
+                example: ABC123
+              InventoryControl:
+                type: string
+                example: ABC123
+      RadioProfileData:
+        type: object
+        properties:
+          RadioRegisterData:
+            type: object
+            properties:
+              Address:
+                type: string
+                example: ABC123
+              Data:
+                type: string
+                example: ABC123
+      CustomProfileData:
+        type: object
+        properties:
+          ForceEAPMode:
+            type: string
+            example: ABC123
+          FIPS_MODE_ENABLED:
+            type: string
+            example: ABC123
+          MaxNumberOfTagsBuffered:
+            type: string
+            example: ABC123
+  cloudConfig:
+    type: object
+    properties:
+      reader:
+        type: object
+        properties:
+          hostname:
+            type: string
+            example: ABC123
+          tagVisibleTimeout:
+            type: string
+            example: ABC123
+          tagStartsWith:
+            type: string
+            example: ABC123
+          latitude:
+            type: string
+            example: ABC123
+          longitude:
+            type: string
+            example: ABC123
+      commSettings:
+        type: object
+        properties:
+          edgeMicroGatewayAddress:
+            type: string
+            example: ABC123
+          proxyAddress:
+            type: string
+            example: ABC123
+  antennaConfig:
+    type: object
+    properties:
+      Antennas:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              example: ABC123
+            transmitPower:
+              type: object
+              properties:
+                level:
+                  type: string
+                  example: ABC123
+  subscription:
+    type: object
+    properties:
+      id:
+        type: string
+        example: 1e2bb36f-3ea5-419e-a1aa-83da82203af4
+        default: 0
+      type:
+        type: string
+        enum:
+          - Subscription
+      link:
+        type: string
+        example: 'https://mock-api.zebra.com/...'
+      testLink:
+        type: string
+        example: 'https://mock-api.zebra.com/...'
+      pingLink:
+        type: string
+        example: 'https://mock-api.zebra.com/...'
+      name:
+        type: string
+        example: My Subscription
+      authApiKey:
+        type: string
+        example: b61b5422-aa0e-44f8-bf91-7c699fd0528f
+      events:
+        type: array
+        items:
+          type: string
+          example: My Event
+      devices:
+        type: array
+        items:
+          type: string
+          example: '[device s/n]'
+      active:
+        type: boolean
+        example: false
+      config:
+        type: object
+      updatedAt:
+        type: string
+        example: '2019-04-23T18:25:43.511Z'
+      createdAt:
+        type: string
+        example: '2019-04-23T18:25:43.511Z'
+  subscriptionPage:
+    required:
+      - link
+      - type
+      - pageOf
+      - contents
+    properties:
+      link:
+        type: string
+        example: 'https://mock-api.zebra.com/...'
+        description: A link to the current page
+      type:
+        type: string
+        enum:
+          - Page
+      pageOf:
+        type: string
+        example: 'https://mock-api.zebra.com/...'
+        description: A link to the list endpoint of the resource
+      previous:
+        type: string
+        example: 'https://mock-api.zebra.com/...'
+        description: A link to the previous page
+      next:
+        type: string
+        example: 'https://mock-api.zebra.com/...'
+        description: A link to the next page
+      contents:
+        type: array
+        items:
+          $ref: '#/definitions/subscription'
+host: mock-api.zebra.com
+basePath: /v1/rfid-reader-management
+schemes:
+  - https
