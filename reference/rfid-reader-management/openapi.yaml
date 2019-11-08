@@ -1,7 +1,7 @@
 info:
-  description: "API's for RFID reader configuration and management, including device and cloud settings, GPIO, and device health."
+  description: "API's for RFID read to Cloud. Reader configuration and management, cloud settings, GPIO, and device health."
   version: 1.0.0-oas3
-  title: RFID Reader Management
+  title: RFID Read to Cloud
 tags:
   - name: actions
     description: Reader device commands
