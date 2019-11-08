@@ -1350,5 +1350,5 @@ components:
           example: Internal error.
       description: ''
 servers:
-  - url: 'https://virtserver.swaggerhub.com/ZebraTechnologies/Reader-Configuration/1.0.0'
+  - url: 'https://mock-api.zebra.com/v1/rfid-reader-management'
 openapi: 3.0.0
