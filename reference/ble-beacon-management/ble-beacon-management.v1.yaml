@@ -27,39 +27,13 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
       requestBody:
         content:
           application/json:
@@ -87,39 +61,13 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
       description: ''
       operationId: beacons
   '/beacons/{registeredId}':
@@ -146,39 +94,13 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
       parameters: []
       description: ''
       operationId: beacon
@@ -194,39 +116,13 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
       description: ''
       operationId: change beacon registration
       requestBody:
@@ -245,39 +141,13 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
       operationId: remove regsitration
   /register:
     post:
@@ -297,39 +167,13 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
       requestBody:
         content:
           application/json:
@@ -350,39 +194,13 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
       description: ''
       operationId: decommission beacon
     parameters:
@@ -405,39 +223,13 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
       operationId: activate
     parameters:
       - schema:
@@ -459,39 +251,13 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
       operationId: deactivate
       description: ''
     parameters:
@@ -518,39 +284,13 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
       operationId: metadata
     post:
       summary: Adds a metadata record to a beacon.
@@ -564,39 +304,13 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
       operationId: add metadata
       requestBody:
         content:
@@ -636,39 +350,13 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
       operationId: change metadata
       requestBody:
         content:
@@ -687,38 +375,12 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
-                properties:
-                  code:
-                    type: integer
-                    description: The error code
-                    example: 123
-                  message:
-                    type: string
-                    description: A brief description of the error
-                    example: Internal error.
+                $ref: ../../models/error.v1.yaml
 components:
   securitySchemes: {}
