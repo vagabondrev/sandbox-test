@@ -1,0 +1,864 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "ble-beacon-management",
+    "description": "API's for management of Bluetooth low-energy Beacons.",
+    "contact": {
+      "name": "Zebra Savanna"
+    }
+  },
+  "host": "mock-api.zebra.com",
+  "basePath": "/ble",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/observed": {
+      "post": {
+        "description": "Gets beacon information for the observations provided.",
+        "summary": "beacon observations",
+        "tags": [
+          "actions"
+        ],
+        "operationId": "ObservedPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/beaconObservation"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/beaconInfo"
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "description": "Registers a new BLE beacon.",
+        "summary": "register beacon",
+        "tags": [
+          "actions"
+        ],
+        "operationId": "RegisterPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/beacon"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/decommission/{registeredId}": {
+      "post": {
+        "description": "Decommisions a BLE beacon.",
+        "summary": "decommission beacon",
+        "tags": [
+          "actions"
+        ],
+        "operationId": "DecommissionByRegisteredIdPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "registeredId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The registered ID of the beacon."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/activate/{regsiteredId}": {
+      "post": {
+        "description": "Activates a BLE beacon.",
+        "summary": "activate",
+        "tags": [
+          "actions"
+        ],
+        "operationId": "ActivateByRegsiteredIdPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "regsiteredId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The registered ID of the beacon."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/deactivate/{registeredId}": {
+      "post": {
+        "description": "Deactivates a BLE beacon.",
+        "summary": "deactivate",
+        "tags": [
+          "actions"
+        ],
+        "operationId": "DeactivateByRegisteredIdPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "registeredId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The registered ID of the beacon."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/beacons": {
+      "get": {
+        "description": "Gets a list of BLE beacons.",
+        "summary": "beacons",
+        "tags": [
+          "beacons"
+        ],
+        "operationId": "BeaconsGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/subscriptionPage"
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/beacons/{registeredId}": {
+      "get": {
+        "description": "Gets a registered BLE beacon.",
+        "summary": "beacon",
+        "tags": [
+          "beacons"
+        ],
+        "operationId": "BeaconsByRegisteredIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "registeredId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The registered ID of the beacon."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Changes a registered BLE beacon.",
+        "summary": "change beacon registration",
+        "tags": [
+          "beacons"
+        ],
+        "operationId": "BeaconsByRegisteredIdPut",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "registeredId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The registered ID of the beacon."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/beacon"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Removes a beacon registration.",
+        "summary": "remove regsitration",
+        "operationId": "BeaconsByRegisteredIdDelete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "registeredId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The registered ID of the beacon."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/beacons/{registeredId}/metadata": {
+      "get": {
+        "description": "Gets the metadata collection for a beacon.",
+        "summary": "metadata",
+        "tags": [
+          "metadata"
+        ],
+        "operationId": "BeaconsMetadataByRegisteredIdGet",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "registeredId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The registered ID of the beacon."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/beaconMeta"
+              }
+            },
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Adds a metadata record to a beacon.",
+        "summary": "add metadata",
+        "tags": [
+          "metadata"
+        ],
+        "operationId": "BeaconsMetadataByRegisteredIdPost",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "registeredId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The registered ID of the beacon."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/beaconMeta"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
+    "/beacons/{registeredId}/metadata/{metaId}": {
+      "put": {
+        "description": "Changes a metadata record on a beacon.",
+        "summary": "change metadata",
+        "tags": [
+          "metadata"
+        ],
+        "operationId": "BeaconsMetadataByRegisteredIdAndMetaIdPut",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "registeredId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The registered ID of the beacon."
+          },
+          {
+            "name": "metaId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The metadata ID of the metadata record."
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/beaconMeta"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Removes a metadata record from a beacon.",
+        "summary": "Removes a metadata record from a beacon.",
+        "tags": [
+          "metadata"
+        ],
+        "operationId": "BeaconsMetadataByRegisteredIdAndMetaIdDelete",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "registeredId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The registered ID of the beacon."
+          },
+          {
+            "name": "metaId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The metadata ID of the metadata record."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {}
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "beaconObservation": {
+      "title": "beaconObservation",
+      "description": "Represents an observed BLE beacon.",
+      "type": "object",
+      "properties": {
+        "advertisedId": {
+          "$ref": "#/definitions/adversisedId"
+        },
+        "telemetry": {
+          "description": "The telemetry data from the beacon in base64 format.",
+          "example": "VEVTVFRFU1RURVNUVEVTVEVYQU1QTEU=",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "The time the beacon was observed.",
+          "example": "2019-11-12T18:25:43.511Z",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "advertisedId"
+      ]
+    },
+    "adversisedId": {
+      "title": "adversisedId",
+      "description": "Represents an advertised BLE beacon Identifier.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The advertised ID of the beacon",
+          "example": "38d4eea7-de99-4a27-97f7-35488ad049e1",
+          "type": "string",
+          "format": "uuid"
+        },
+        "type": {
+          "$ref": "#/definitions/Type"
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
+    "Type": {
+      "title": "Type",
+      "description": "The advertised type of the beacon.",
+      "example": "eddystone",
+      "type": "string",
+      "enum": [
+        "eddystone",
+        "ibeacon",
+        "altbeacon",
+        "eddystone_eid",
+        "unspecified"
+      ]
+    },
+    "beaconInfo": {
+      "title": "beaconInfo",
+      "description": "Represents the advertised BLE beacon information.",
+      "type": "object",
+      "properties": {
+        "advertisedId": {
+          "$ref": "#/definitions/adversisedId"
+        },
+        "name": {
+          "description": "The friendly name of the beacon.",
+          "example": "My Beacon",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "The advertised beacon metadata.",
+          "example": "VEVTVFRFU1RURVNUVEVTVEVYQU1QTEU=",
+          "type": "string"
+        }
+      },
+      "required": [
+        "advertisedId",
+        "name"
+      ]
+    },
+    "error": {
+      "title": "error",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code",
+          "example": 123,
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "description": "A brief description of the error",
+          "example": "Internal error.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "subscriptionPage": {
+      "title": "subscriptionPage",
+      "type": "object",
+      "properties": {
+        "contents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/beacon"
+          }
+        },
+        "next": {
+          "description": "A link to the next page",
+          "example": "https://mock-api.zebra.com/...",
+          "type": "string"
+        },
+        "previous": {
+          "description": "A link to the previous page",
+          "example": "https://mock-api.zebra.com/...",
+          "type": "string"
+        },
+        "pageOf": {
+          "description": "A link to the list endpoint of the resource",
+          "example": "https://mock-api.zebra.com/...",
+          "type": "string"
+        },
+        "type": {
+          "example": "Page",
+          "type": "string",
+          "default": "Page"
+        },
+        "link": {
+          "description": "A link to the current page",
+          "example": "https://mock-api.zebra.com/...",
+          "type": "string"
+        }
+      },
+      "required": [
+        "contents",
+        "pageOf",
+        "type",
+        "link"
+      ]
+    },
+    "beacon": {
+      "title": "beacon",
+      "description": "Represents a BLE beacon.",
+      "type": "object",
+      "properties": {
+        "registeredId": {
+          "description": "The registered ID for the beacon, provided by the server at registration.",
+          "example": "00a31534-8f62-4685-9f1b-88b0abfb4cc2",
+          "type": "string",
+          "format": "uuid"
+        },
+        "advertisedId": {
+          "$ref": "#/definitions/adversisedId"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "geoLocation": {
+          "$ref": "#/definitions/geoLocation"
+        },
+        "description": {
+          "description": "A description of the beacon.",
+          "example": "My Beacon",
+          "type": "string"
+        },
+        "provisioningKey": {
+          "description": "The provisioning key for the beacon, (if present).",
+          "example": "94f03059-bef0-4516-a19d-463b2a707a5c",
+          "type": "string"
+        }
+      },
+      "required": [
+        "registeredId",
+        "advertisedId",
+        "status"
+      ]
+    },
+    "Status": {
+      "title": "Status",
+      "description": "The beacon status.",
+      "example": "active",
+      "type": "string",
+      "enum": [
+        "active",
+        "decommissioned",
+        "inactive",
+        "unspecified"
+      ]
+    },
+    "geoLocation": {
+      "title": "geoLocation",
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number",
+          "format": "double"
+        },
+        "lng": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "beaconMeta": {
+      "title": "beaconMeta",
+      "description": "Represents BLE beacon metadata.",
+      "type": "object",
+      "properties": {
+        "metaId": {
+          "description": "The metadata record ID.",
+          "example": "73801f9d-c8ca-4c81-8766-31ace5c17933",
+          "type": "string",
+          "format": "uuid"
+        },
+        "type": {
+          "description": "The metadata type.",
+          "example": "zebra/location",
+          "type": "string"
+        },
+        "data": {
+          "description": "The metadata as base64 bytes.",
+          "example": "VEVTVFRFU1RURVNUVEVTVEVYQU1QTEU=",
+          "type": "string"
+        },
+        "created": {
+          "description": "The date-time the metadata was created.",
+          "example": "2019-11-12T18:25:43.511Z",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "metaId",
+        "type",
+        "data",
+        "created"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "actions",
+      "description": ""
+    },
+    {
+      "name": "beacons",
+      "description": ""
+    },
+    {
+      "name": "metadata",
+      "description": ""
+    }
+  ]
+}  
