@@ -1,0 +1,16 @@
+title: beaconInfo
+type: object
+description: Represents the advertised BLE beacon information.
+properties:
+  advertisedId:
+    $ref: ./adversisedid.v1.yaml
+  name:
+    type: string
+    description: The friendly name of the beacon.
+  metadata:
+    type: string
+    description: The advertised beacon metadata.
+    format: byte
+required:
+  - advertisedId
+  - name

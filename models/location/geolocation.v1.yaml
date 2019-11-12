@@ -1,0 +1,7 @@
+title: geoLocation
+type: object
+properties:
+  lat:
+    type: number
+  lng:
+    type: number

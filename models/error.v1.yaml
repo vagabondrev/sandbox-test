@@ -1,0 +1,14 @@
+title: error
+type: object
+required:
+  - code
+  - message
+properties:
+  code:
+    type: integer
+    description: The error code
+    example: 123
+  message:
+    type: string
+    description: A brief description of the error
+    example: Internal error.

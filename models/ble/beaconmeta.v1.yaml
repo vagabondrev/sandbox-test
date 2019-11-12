@@ -1,0 +1,24 @@
+title: beaconMeta
+type: object
+description: Represents BLE beacon metadata.
+properties:
+  metaId:
+    type: string
+    format: uuid
+    description: The metadata record ID.
+  type:
+    type: string
+    description: The metadata type.
+  data:
+    type: string
+    description: The metadata as base64 bytes.
+    format: byte
+  created:
+    type: string
+    format: date-time
+    description: The date-time the metadata was created.
+required:
+  - metaId
+  - type
+  - data
+  - created

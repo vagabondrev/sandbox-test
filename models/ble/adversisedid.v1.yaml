@@ -1,0 +1,14 @@
+title: adversisedId
+type: object
+description: Represents an advertised BLE beacon Identifier.
+properties:
+  id:
+    type: string
+    description: The advertised ID of the beacon
+    format: uuid
+  type:
+    type: string
+    description: The advertised type of the beacon.
+required:
+  - id
+  - type

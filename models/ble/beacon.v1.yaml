@@ -1,0 +1,30 @@
+title: beacon
+type: object
+description: Represents a BLE beacon.
+properties:
+  registeredId:
+    type: string
+    description: 'The registered ID for the beacon, provided by the server at registration.'
+    format: uuid
+  advertisedId:
+    $ref: ./adversisedid.v1.yaml
+  status:
+    type: string
+    enum:
+      - active
+      - decommissioned
+      - inactive
+      - unspecified
+    description: The beacon status.
+  geoLocation:
+    $ref: ./geolocation.v1.yaml
+  description:
+    type: string
+    description: A description of the beacon.
+  provisioningKey:
+    type: string
+    description: 'The provisioning key for the beacon, (if present).'
+required:
+  - registeredId
+  - advertisedId
+  - status

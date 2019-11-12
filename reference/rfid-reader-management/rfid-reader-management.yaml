@@ -52,13 +52,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
   '/{readerSn}/gpo':
     put:
       tags:
@@ -100,13 +100,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
   /gpi:
     get:
       tags:
@@ -126,19 +126,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/subscriptionPage'
+                $ref: ../../models/webhooks/subscriptionpage.v1.yaml
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
     post:
       tags:
         - gpio
@@ -164,18 +164,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/subscription'
+              $ref: ../../models/webhooks/subscription.v1.yaml
         description: Details of the new subscription
         required: true
   '/gpi/{id}':
@@ -197,19 +197,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/subscription'
+                $ref: ../../models/webhooks/subscription.v1.yaml
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
     put:
       tags:
         - gpio
@@ -237,18 +237,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/subscription'
+              $ref: ../../models/webhooks/subscription.v1.yaml
         required: true
         description: The subscription data
     delete:
@@ -278,13 +278,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
   '/{readerSn}/actions/led':
     put:
       tags:
@@ -332,13 +332,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
   '/{readerSn}/eventmode':
     put:
       tags:
@@ -367,13 +367,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
       requestBody:
         content:
           application/json:
@@ -416,13 +416,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
   '/{readerSn}/filter':
     put:
       tags:
@@ -451,13 +451,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
       requestBody:
         $ref: '#/components/requestBodies/readFilter'
   '/{readerSn}/antenna/{antennaId}':
@@ -494,13 +494,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
       requestBody:
         $ref: '#/components/requestBodies/readFilter'
   '/{readerSn}/settings/device':
@@ -523,19 +523,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/readerConfig'
+                $ref: ../../models/rfid-reader/readerconfig.v1.yaml
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
     put:
       tags:
         - device settings
@@ -564,18 +564,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/readerConfig'
+              $ref: ../../models/rfid-reader/readerconfig.v1.yaml
         description: Details of the reader configuration
         required: true
   '/{readerSn}/settings/cloud':
@@ -598,19 +598,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/cloudConfig'
+                $ref: ../../models/rfid-reader/cloudconfig.v1.yaml
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
     put:
       tags:
         - cloud settings
@@ -639,18 +639,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/cloudConfig'
+              $ref: ../../models/rfid-reader/cloudconfig.v1.yaml
         description: Details of the reader configuration
         required: true
   /health:
@@ -672,19 +672,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/subscriptionPage'
+                $ref: ../../models/webhooks/subscriptionpage.v1.yaml
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
     post:
       tags:
         - device health
@@ -710,18 +710,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/subscriptionPage'
+              $ref: ../../models/webhooks/subscription.v1.yaml
         description: Details of the new subscription
         required: true
   '/health/{id}':
@@ -743,19 +743,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/subscriptionPage'
+                $ref: ../../models/webhooks/subscription.v1.yaml
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
     put:
       tags:
         - device health
@@ -783,18 +783,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/subscriptionPage'
+              $ref: ../../models/webhooks/subscription.v1.yaml
         description: The subscription data
         required: true
     delete:
@@ -824,13 +824,16 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/error'
+                $ref: ../../models/error.v1.yaml
+openapi: 3.0.0
+servers:
+  - url: 'https://mock-api.zebra.com/v1/rfid-reader-management'
 components:
   requestBodies:
     readFilter:
@@ -840,515 +843,4 @@ components:
             $ref: '#/components/schemas/readFilter'
       description: Details of the filter
       required: true
-  schemas:
-    readFilter:
-      type: object
-      properties:
-        Operation:
-          type: string
-          enum:
-            - include
-            - exclude
-        FilterRegex:
-          type: string
-          example: ABC123
-    readInterval:
-      type: object
-      properties:
-        interval:
-          type: integer
-          example: 0
-        unit:
-          type: string
-          enum:
-            - reads
-            - seconds
-            - minutes
-            - hours
-            - days
-    readerEventMode:
-      type: object
-      properties:
-        EventMode:
-          type: string
-          enum:
-            - basic
-            - summaryBatch
-            - dwell
-            - transition
-        Settings:
-          type: object
-          properties:
-            RepeatReadInterval:
-              $ref: '#/components/schemas/readInterval'
-            Transition:
-              type: object
-              properties:
-                IngressLabel:
-                  type: string
-                  example: ABC123
-                EgressLabel:
-                  type: string
-                  example: ABC123
-                Directionality:
-                  type: boolean
-                  example: false
-            Dwell:
-              type: object
-              properties:
-                StartInterval:
-                  $ref: '#/components/schemas/readInterval'
-                StopInterval:
-                  $ref: '#/components/schemas/readInterval'
-    readerConfig:
-      type: object
-      properties:
-        Config:
-          type: object
-          properties:
-            AppVersion:
-              type: object
-              properties:
-                major:
-                  type: string
-                  example: ABC123
-                minor:
-                  type: string
-                  example: ABC123
-                build:
-                  type: string
-                  example: ABC123
-                maintenance:
-                  type: string
-                  example: ABC123
-            CommConfig:
-              type: object
-              properties:
-                EnabledStacks:
-                  type: string
-                  example: ABC123
-                DisableRAPktProcessing:
-                  type: string
-                  example: ABC123
-                EnableDHCPv6:
-                  type: string
-                  example: ABC123
-                IPv6StaticIPAddr:
-                  type: string
-                  example: ABC123
-                IPv6SubnetMask:
-                  type: string
-                  example: ABC123
-                IPv6StaticGateway:
-                  type: string
-                  example: ABC123
-                IPv6DNSIP:
-                  type: string
-                  example: ABC123
-                DHCP:
-                  type: string
-                  example: ABC123
-                IPAddr:
-                  type: string
-                  example: ABC123
-                Mask:
-                  type: string
-                  example: ABC123
-                Gateway:
-                  type: string
-                  example: ABC123
-                DNS:
-                  type: string
-                  example: ABC123
-                HttpRunning:
-                  type: string
-                  example: ABC123
-                TelnetActive:
-                  type: string
-                  example: ABC123
-                FtpActive:
-                  type: string
-                  example: ABC123
-                usbMode:
-                  type: string
-                  example: ABC123
-                WatchdogEnabled:
-                  type: string
-                  example: ABC123
-                SerialConTimeout:
-                  type: string
-                  example: ABC123
-                SNTP:
-                  type: string
-                  example: ABC123
-                sntpHostDisplayMode:
-                  type: string
-                  example: ABC123
-                llrpClientMode:
-                  type: string
-                  example: ABC123
-                llrpSecureMode:
-                  type: string
-                  example: ABC123
-                llrpSecureModeValidatePeer:
-                  type: string
-                  example: ABC123
-                llrpPort:
-                  type: string
-                  example: ABC123
-                llrpHostIP:
-                  type: string
-                  example: ABC123
-                allowllrpConnOverride:
-                  type: string
-                  example: ABC123
-            Bluetooth:
-              type: object
-              properties:
-                discoverable:
-                  type: string
-                  example: ABC123
-                pairable:
-                  type: string
-                  example: ABC123
-                PincodeEnabled:
-                  type: string
-                  example: ABC123
-                passkey:
-                  type: string
-                  example: ABC123
-                startIP:
-                  type: string
-                  example: ABC123
-                endIP:
-                  type: string
-                  example: ABC123
-            WirelessConfig:
-              type: object
-              properties:
-                essid:
-                  type: string
-                  example: ABC123
-                password:
-                  type: string
-                  example: ABC123
-                autoconnect:
-                  type: string
-                  example: ABC123
-            RegionConfig:
-              type: object
-              properties:
-                RFCountry:
-                  type: string
-                  example: ABC123
-                RFRegulatory:
-                  type: string
-                  example: ABC123
-                RFScanMode:
-                  type: string
-                  example: ABC123
-                LBTEnable:
-                  type: string
-                  example: ABC123
-                ChannelData:
-                  type: string
-                  example: ABC123
-            SnmpConfig:
-              type: object
-              properties:
-                snmpVersion:
-                  type: string
-                  example: ABC123
-                heartbeat:
-                  type: string
-                  example: ABC123
-            SyslogConfig:
-              type: object
-              properties:
-                RemoteIp:
-                  type: string
-                  example: ABC123
-                RemotePort:
-                  type: string
-                  example: ABC123
-                LogMinSeverity:
-                  type: string
-                  example: ABC123
-                ApplyFilter:
-                  type: string
-                  example: ABC123
-                MinimumSeverity:
-                  type: string
-                  example: ABC123
-                ProcessFilter:
-                  type: string
-                  example: ABC123
-            UserList:
-              type: object
-              properties:
-                User:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        example: ABC123
-                      PSWD:
-                        type: string
-                        example: ABC123
-            IPReader:
-              type: object
-              properties:
-                name:
-                  type: string
-                  example: ABC123
-                desc:
-                  type: string
-                  example: ABC123
-                flags:
-                  type: string
-                  example: ABC123
-                MonoStatic:
-                  type: string
-                  example: ABC123
-                CheckAntenna:
-                  type: string
-                  example: ABC123
-                gpiDebounceTime:
-                  type: string
-                  example: ABC123
-                gpioMapping:
-                  type: string
-                  example: ABC123
-                idleModeTimeOut:
-                  type: string
-                  example: ABC123
-                diagMode:
-                  type: string
-                  example: ABC123
-                extDiagMode:
-                  type: string
-                  example: ABC123
-                contact:
-                  type: string
-                  example: ABC123
-                PowerNegotiation:
-                  type: string
-                  example: ABC123
-                PowerNegotiationProtocol:
-                  type: string
-                  example: ABC123
-                allowGuestLogin:
-                  type: string
-                  example: ABC123
-                ReadPoint:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        example: ABC123
-                      flags:
-                        type: string
-                        example: ABC123
-                      CableLossPerHundredFt:
-                        type: string
-                        example: ABC123
-                      CableLength:
-                        type: string
-                        example: ABC123
-            SerialPortConf:
-              type: object
-              properties:
-                Mode:
-                  type: string
-                  example: ABC123
-                Baudrate:
-                  type: string
-                  example: ABC123
-                Databits:
-                  type: string
-                  example: ABC123
-                Parity:
-                  type: string
-                  example: ABC123
-                Stopbits:
-                  type: string
-                  example: ABC123
-                Flowcontrol:
-                  type: string
-                  example: ABC123
-                TagMetaData:
-                  type: string
-                  example: ABC123
-                InventoryControl:
-                  type: string
-                  example: ABC123
-        RadioProfileData:
-          type: object
-          properties:
-            RadioRegisterData:
-              type: object
-              properties:
-                Address:
-                  type: string
-                  example: ABC123
-                Data:
-                  type: string
-                  example: ABC123
-        CustomProfileData:
-          type: object
-          properties:
-            ForceEAPMode:
-              type: string
-              example: ABC123
-            FIPS_MODE_ENABLED:
-              type: string
-              example: ABC123
-            MaxNumberOfTagsBuffered:
-              type: string
-              example: ABC123
-    cloudConfig:
-      type: object
-      properties:
-        reader:
-          type: object
-          properties:
-            hostname:
-              type: string
-              example: ABC123
-            tagVisibleTimeout:
-              type: string
-              example: ABC123
-            tagStartsWith:
-              type: string
-              example: ABC123
-            latitude:
-              type: string
-              example: ABC123
-            longitude:
-              type: string
-              example: ABC123
-        commSettings:
-          type: object
-          properties:
-            edgeMicroGatewayAddress:
-              type: string
-              example: ABC123
-            proxyAddress:
-              type: string
-              example: ABC123
-    antennaConfig:
-      type: object
-      properties:
-        Antennas:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                example: ABC123
-              transmitPower:
-                type: object
-                properties:
-                  level:
-                    type: string
-                    example: ABC123
-    subscription:
-      type: object
-      properties:
-        id:
-          type: string
-          example: 1e2bb36f-3ea5-419e-a1aa-83da82203af4
-          default: 0
-        type:
-          type: string
-          enum:
-            - Subscription
-        link:
-          type: string
-          example: 'https://mock-api.zebra.com/...'
-        testLink:
-          type: string
-          example: 'https://mock-api.zebra.com/...'
-        pingLink:
-          type: string
-          example: 'https://mock-api.zebra.com/...'
-        name:
-          type: string
-          example: My Subscription
-        authApiKey:
-          type: string
-          example: b61b5422-aa0e-44f8-bf91-7c699fd0528f
-        events:
-          type: array
-          items:
-            type: string
-            example: My Event
-        devices:
-          type: array
-          items:
-            type: string
-            example: '[device s/n]'
-        active:
-          type: boolean
-          example: false
-        config:
-          type: object
-        updatedAt:
-          type: string
-          example: '2019-04-23T18:25:43.511Z'
-        createdAt:
-          type: string
-          example: '2019-04-23T18:25:43.511Z'
-    subscriptionPage:
-      required:
-        - link
-        - type
-        - pageOf
-        - contents
-      properties:
-        link:
-          type: string
-          example: 'https://mock-api.zebra.com/...'
-          description: A link to the current page
-        type:
-          type: string
-          enum:
-            - Page
-        pageOf:
-          type: string
-          example: 'https://mock-api.zebra.com/...'
-          description: A link to the list endpoint of the resource
-        previous:
-          type: string
-          example: 'https://mock-api.zebra.com/...'
-          description: A link to the previous page
-        next:
-          type: string
-          example: 'https://mock-api.zebra.com/...'
-          description: A link to the next page
-        contents:
-          type: array
-          items:
-            $ref: '#/components/schemas/subscription'
-    error:
-      required:
-        - code
-        - message
-      properties:
-        code:
-          type: integer
-          description: The error code
-          example: 123
-        message:
-          type: string
-          description: A brief description of the error
-          example: Internal error.
-      description: ''
-servers:
-  - url: 'https://mock-api.zebra.com/v1/rfid-reader-management'
-openapi: 3.0.0
+  schemas: {}

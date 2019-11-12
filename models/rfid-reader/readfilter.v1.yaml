@@ -1,0 +1,11 @@
+title: readFilter
+type: object
+properties:
+  Operation:
+    type: string
+    enum:
+      - include
+      - exclude
+  FilterRegex:
+    type: string
+    example: ABC123
