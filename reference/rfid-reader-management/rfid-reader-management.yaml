@@ -378,7 +378,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/readerEventMode'
+              $ref: ../../models/rfid-reader/readereventmode.v1.yaml
         description: Details of the event mode
         required: true
   '/{readerSn}/session/{sessionId}':
@@ -459,7 +459,10 @@ paths:
               schema:
                 $ref: ../../models/error.v1.yaml
       requestBody:
-        $ref: '#/components/requestBodies/readFilter'
+        content:
+          application/json:
+            schema:
+              $ref: ../../models/rfid-reader/readfilter.v1.yaml
   '/{readerSn}/antenna/{antennaId}':
     put:
       tags:
@@ -502,7 +505,10 @@ paths:
               schema:
                 $ref: ../../models/error.v1.yaml
       requestBody:
-        $ref: '#/components/requestBodies/readFilter'
+        content:
+          application/json:
+            schema:
+              $ref: ../../models/rfid-reader/antennaconfig.v1.yaml
   '/{readerSn}/settings/device':
     get:
       tags:
@@ -834,13 +840,3 @@ paths:
 openapi: 3.0.0
 servers:
   - url: 'https://mock-api.zebra.com/v1/rfid-reader-management'
-components:
-  requestBodies:
-    readFilter:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/readFilter'
-      description: Details of the filter
-      required: true
-  schemas: {}

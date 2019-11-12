@@ -12,7 +12,7 @@ properties:
     type: object
     properties:
       RepeatReadInterval:
-        $ref: '#/components/schemas/readInterval'
+        $ref: ./readinterval.v1.yaml
       Transition:
         type: object
         properties:
@@ -29,6 +29,6 @@ properties:
         type: object
         properties:
           StartInterval:
-            $ref: '#/components/schemas/readInterval'
+            $ref: ./readinterval.v1.yaml
           StopInterval:
-            $ref: '#/components/schemas/readInterval'
+            $ref: ./readinterval.v1.yaml

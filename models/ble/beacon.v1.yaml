@@ -6,24 +6,28 @@ properties:
     type: string
     description: 'The registered ID for the beacon, provided by the server at registration.'
     format: uuid
+    example: 00a31534-8f62-4685-9f1b-88b0abfb4cc2
   advertisedId:
     $ref: ./adversisedid.v1.yaml
   status:
     type: string
+    description: The beacon status.
     enum:
       - active
       - decommissioned
       - inactive
       - unspecified
-    description: The beacon status.
+    example: active
   geoLocation:
     $ref: ../location/geolocation.v1.yaml
   description:
     type: string
     description: A description of the beacon.
+    example: My Beacon
   provisioningKey:
     type: string
     description: 'The provisioning key for the beacon, (if present).'
+    example: 94f03059-bef0-4516-a19d-463b2a707a5c
 required:
   - registeredId
   - advertisedId

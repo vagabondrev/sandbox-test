@@ -1,14 +1,23 @@
 title: adversisedId
 type: object
 description: Represents an advertised BLE beacon Identifier.
+x-examples: {}
 properties:
   id:
     type: string
     description: The advertised ID of the beacon
     format: uuid
+    example: 38d4eea7-de99-4a27-97f7-35488ad049e1
   type:
     type: string
     description: The advertised type of the beacon.
+    enum:
+      - eddystone
+      - ibeacon
+      - altbeacon
+      - eddystone_eid
+      - unspecified
+    example: ibeacon
 required:
   - id
   - type

@@ -7,10 +7,12 @@ properties:
   name:
     type: string
     description: The friendly name of the beacon.
+    example: My Beacon
   metadata:
     type: string
     description: The advertised beacon metadata.
     format: byte
+    example: VEVTVFRFU1RURVNUVEVTVEVYQU1QTEU=
 required:
   - advertisedId
   - name

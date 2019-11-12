@@ -4,19 +4,23 @@ description: Represents BLE beacon metadata.
 properties:
   metaId:
     type: string
-    format: uuid
     description: The metadata record ID.
+    format: uuid
+    example: 73801f9d-c8ca-4c81-8766-31ace5c17933
   type:
     type: string
     description: The metadata type.
+    example: zebra/location
   data:
     type: string
     description: The metadata as base64 bytes.
     format: byte
+    example: VEVTVFRFU1RURVNUVEVTVEVYQU1QTEU=
   created:
     type: string
-    format: date-time
     description: The date-time the metadata was created.
+    format: date-time
+    example: '2019-11-12T18:25:43.511Z'
 required:
   - metaId
   - type

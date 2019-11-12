@@ -8,9 +8,11 @@ properties:
     type: string
     description: The telemetry data from the beacon in base64 format.
     format: byte
+    example: VEVTVFRFU1RURVNUVEVTVEVYQU1QTEU=
   timestamp:
     type: string
-    format: date-time
     description: The time the beacon was observed.
+    format: date-time
+    example: '2019-11-12T18:25:43.511Z'
 required:
   - advertisedId
