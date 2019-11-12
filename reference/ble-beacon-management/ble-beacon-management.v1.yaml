@@ -3,6 +3,8 @@ info:
   title: ble-beacon-management
   version: '1.0'
   description: "API's for management of Bluetooth low-energy Beacons."
+  contact:
+    name: Zebra Savanna
 servers:
   - url: 'http://mock-api.zebra.com/ble'
 paths:
@@ -293,7 +295,6 @@ paths:
               schema:
                 $ref: ../../models/error.v1.yaml
       operationId: metadata
-      requestBody: {}
     post:
       summary: Adds a metadata record to a beacon.
       tags:
@@ -387,5 +388,4 @@ paths:
               schema:
                 $ref: ../../models/error.v1.yaml
 components:
-  schemas: {}
   securitySchemes: {}

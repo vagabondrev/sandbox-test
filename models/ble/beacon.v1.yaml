@@ -17,7 +17,7 @@ properties:
       - unspecified
     description: The beacon status.
   geoLocation:
-    $ref: ./geolocation.v1.yaml
+    $ref: ../location/geolocation.v1.yaml
   description:
     type: string
     description: A description of the beacon.
