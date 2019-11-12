@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: ble-beacon-management
   version: '1.0'
-  description: API's for management of Bluetooth low-energy Beacons.
+  description: "API's for management of Bluetooth low-energy Beacons."
   contact:
     name: Zebra Savanna
 servers:
@@ -21,9 +21,9 @@ paths:
               schema:
                 type: array
                 items:
-                  title: beaconInfo
-                  type: object
-                  description: Represents the advertised BLE beacon information.
+                  required:
+                    - advertisedId
+                    - name
                   properties:
                     advertisedId:
                       title: adversisedId
@@ -58,19 +58,14 @@ paths:
                       description: The advertised beacon metadata.
                       format: byte
                       example: VEVTVFRFU1RURVNUVEVTVEVYQU1QTEU=
-                  required:
-                    - advertisedId
-                    - name
+                  description: Represents the advertised BLE beacon information.
+                  type: object
+                  title: beaconInfo
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -80,16 +75,16 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -99,15 +94,19 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
       requestBody:
         content:
           application/json:
             schema:
               type: array
               items:
-                title: beaconObservation
-                type: object
-                description: Represents an observed BLE beacon.
+                required:
+                  - advertisedId
                 properties:
                   advertisedId:
                     title: adversisedId
@@ -143,8 +142,9 @@ paths:
                     description: The time the beacon was observed.
                     format: date-time
                     example: '2019-11-12T18:25:43.511Z'
-                required:
-                  - advertisedId
+                description: Represents an observed BLE beacon.
+                type: object
+                title: beaconObservation
         description: ''
       description: ''
       operationId: beacon observations
@@ -159,8 +159,11 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                title: subscriptionPage
+                required:
+                  - contents
+                  - pageOf
+                  - type
+                  - link
                 properties:
                   contents:
                     type: array
@@ -171,9 +174,7 @@ paths:
                       properties:
                         registeredId:
                           type: string
-                          description: >-
-                            The registered ID for the beacon, provided by the
-                            server at registration.
+                          description: 'The registered ID for the beacon, provided by the server at registration.'
                           format: uuid
                           example: 00a31534-8f62-4685-9f1b-88b0abfb4cc2
                         advertisedId:
@@ -249,21 +250,13 @@ paths:
                     type: string
                     example: 'https://mock-api.zebra.com/...'
                     description: A link to the current page
-                required:
-                  - contents
-                  - pageOf
-                  - type
-                  - link
+                title: subscriptionPage
+                type: object
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -273,16 +266,16 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -292,6 +285,11 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
       description: ''
       operationId: beacons
   '/beacons/{registeredId}':
@@ -309,16 +307,15 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/ble/beacon.v1.yaml
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -328,16 +325,16 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -347,6 +344,11 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
       parameters: []
       description: ''
       operationId: beacon
@@ -362,11 +364,6 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -376,16 +373,16 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -395,21 +392,25 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
       description: ''
       operationId: change beacon registration
       requestBody:
         content:
           application/json:
             schema:
-              title: beacon
-              type: object
-              description: Represents a BLE beacon.
+              required:
+                - registeredId
+                - advertisedId
+                - status
               properties:
                 registeredId:
                   type: string
-                  description: >-
-                    The registered ID for the beacon, provided by the server at
-                    registration.
+                  description: 'The registered ID for the beacon, provided by the server at registration.'
                   format: uuid
                   example: 00a31534-8f62-4685-9f1b-88b0abfb4cc2
                 advertisedId:
@@ -461,10 +462,9 @@ paths:
                   type: string
                   description: 'The provisioning key for the beacon, (if present).'
                   example: 94f03059-bef0-4516-a19d-463b2a707a5c
-              required:
-                - registeredId
-                - advertisedId
-                - status
+              description: Represents a BLE beacon.
+              type: object
+              title: beacon
         description: ''
     delete:
       summary: Removes a beacon registration.
@@ -476,11 +476,6 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -490,16 +485,16 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -509,6 +504,11 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
       operationId: remove regsitration
   /register:
     post:
@@ -528,11 +528,6 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -542,16 +537,16 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -561,19 +556,23 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
       requestBody:
         content:
           application/json:
             schema:
-              title: beacon
-              type: object
-              description: Represents a BLE beacon.
+              required:
+                - registeredId
+                - advertisedId
+                - status
               properties:
                 registeredId:
                   type: string
-                  description: >-
-                    The registered ID for the beacon, provided by the server at
-                    registration.
+                  description: 'The registered ID for the beacon, provided by the server at registration.'
                   format: uuid
                   example: 00a31534-8f62-4685-9f1b-88b0abfb4cc2
                 advertisedId:
@@ -625,10 +624,9 @@ paths:
                   type: string
                   description: 'The provisioning key for the beacon, (if present).'
                   example: 94f03059-bef0-4516-a19d-463b2a707a5c
-              required:
-                - registeredId
-                - advertisedId
-                - status
+              description: Represents a BLE beacon.
+              type: object
+              title: beacon
       description: ''
       operationId: register beacon
   '/decommission/{registeredId}':
@@ -644,11 +642,6 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -658,16 +651,16 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -677,6 +670,11 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
       description: ''
       operationId: decommission beacon
     parameters:
@@ -699,11 +697,6 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -713,16 +706,16 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -732,6 +725,11 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
       operationId: activate
     parameters:
       - schema:
@@ -753,11 +751,6 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -767,16 +760,16 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -786,6 +779,11 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
       operationId: deactivate
       description: ''
     parameters:
@@ -808,9 +806,11 @@ paths:
               schema:
                 type: array
                 items:
-                  title: beaconMeta
-                  type: object
-                  description: Represents BLE beacon metadata.
+                  required:
+                    - metaId
+                    - type
+                    - data
+                    - created
                   properties:
                     metaId:
                       type: string
@@ -831,21 +831,14 @@ paths:
                       description: The date-time the metadata was created.
                       format: date-time
                       example: '2019-11-12T18:25:43.511Z'
-                  required:
-                    - metaId
-                    - type
-                    - data
-                    - created
+                  description: Represents BLE beacon metadata.
+                  type: object
+                  title: beaconMeta
         '400':
           description: Bad Request
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -855,16 +848,16 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -874,6 +867,11 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
       operationId: metadata
     post:
       summary: Adds a metadata record to a beacon.
@@ -887,11 +885,6 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -901,16 +894,16 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -920,14 +913,21 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
       operationId: add metadata
       requestBody:
         content:
           application/json:
             schema:
-              title: beaconMeta
-              type: object
-              description: Represents BLE beacon metadata.
+              required:
+                - metaId
+                - type
+                - data
+                - created
               properties:
                 metaId:
                   type: string
@@ -948,11 +948,9 @@ paths:
                   description: The date-time the metadata was created.
                   format: date-time
                   example: '2019-11-12T18:25:43.511Z'
-              required:
-                - metaId
-                - type
-                - data
-                - created
+              description: Represents BLE beacon metadata.
+              type: object
+              title: beaconMeta
     parameters:
       - schema:
           type: string
@@ -986,11 +984,6 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -1000,16 +993,16 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -1019,14 +1012,21 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
       operationId: change metadata
       requestBody:
         content:
           application/json:
             schema:
-              title: beaconMeta
-              type: object
-              description: Represents BLE beacon metadata.
+              required:
+                - metaId
+                - type
+                - data
+                - created
               properties:
                 metaId:
                   type: string
@@ -1047,11 +1047,9 @@ paths:
                   description: The date-time the metadata was created.
                   format: date-time
                   example: '2019-11-12T18:25:43.511Z'
-              required:
-                - metaId
-                - type
-                - data
-                - created
+              description: Represents BLE beacon metadata.
+              type: object
+              title: beaconMeta
     delete:
       summary: Removes a metadata record from a beacon.
       tags:
@@ -1064,11 +1062,6 @@ paths:
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -1078,16 +1071,16 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
         '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                title: error
-                type: object
-                required:
-                  - code
-                  - message
                 properties:
                   code:
                     type: integer
@@ -1097,5 +1090,10 @@ paths:
                     type: string
                     description: A brief description of the error
                     example: Internal error.
+                required:
+                  - code
+                  - message
+                type: object
+                title: error
 components:
   securitySchemes: {}
