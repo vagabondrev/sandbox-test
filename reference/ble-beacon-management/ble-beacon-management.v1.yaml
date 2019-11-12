@@ -100,11 +100,6 @@ paths:
       parameters: []
       description: ''
       operationId: beacon
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: ../../models/ble/beacon.v1.yaml
     put:
       summary: Changes a registered BLE beacon.
       tags:
@@ -329,15 +324,13 @@ paths:
         description: The registered ID of the beacon.
   '/beacons/{registeredId}/metadata/{metaId}':
     parameters:
-      - type: string
-        name: registeredId
+      - name: registeredId
         in: path
         required: true
         schema:
           type: string
         description: The registered ID of the beacon.
-      - type: string
-        name: metaId
+      - name: metaId
         in: path
         required: true
         schema:
