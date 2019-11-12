@@ -1,0 +1,391 @@
+openapi: 3.0.0
+info:
+  title: ble-beacon-management
+  version: '1.0'
+  description: "API's for management of Bluetooth low-energy Beacons."
+servers:
+  - url: 'http://mock-api.zebra.com/ble'
+paths:
+  /observed:
+    post:
+      summary: Gets beacon information for the observations provided.
+      tags:
+        - actions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../../models/ble/beaconinfo.v1.yaml
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: ../../models/ble/beaconobservation.v1.yaml
+        description: ''
+      description: ''
+      operationId: beacon observations
+  /beacons:
+    get:
+      summary: Gets a list of BLE beacons.
+      tags:
+        - beacons
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/ble/beaconpage.v1.yaml
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+      description: ''
+      operationId: beacons
+  '/beacons/{registeredId}':
+    parameters:
+      - schema:
+          type: string
+        name: registeredId
+        in: path
+        required: true
+        description: The registered ID of the beacon.
+    get:
+      summary: Gets a registered BLE beacon.
+      tags:
+        - beacons
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+      parameters: []
+      description: ''
+      operationId: beacon
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../../models/ble/beacon.v1.yaml
+    put:
+      summary: Changes a registered BLE beacon.
+      tags:
+        - beacons
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+      description: ''
+      operationId: change beacon registration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../../models/ble/beacon.v1.yaml
+        description: ''
+    delete:
+      summary: Removes a beacon registration.
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+      operationId: remove regsitration
+  /register:
+    post:
+      summary: Registers a new BLE beacon.
+      tags:
+        - actions
+      responses:
+        '201':
+          description: Created
+          headers:
+            location:
+              schema:
+                type: string
+              description: The URL link of the beacon registration.
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../../models/ble/beacon.v1.yaml
+      description: ''
+      operationId: register beacon
+  '/decommission/{registeredId}':
+    post:
+      summary: Decommisions a BLE beacon.
+      tags:
+        - actions
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+      description: ''
+      operationId: decommission beacon
+    parameters:
+      - schema:
+          type: string
+        name: registeredId
+        in: path
+        required: true
+        description: The registered ID of the beacon.
+  '/activate/{regsiteredId}':
+    post:
+      summary: Activates a BLE beacon.
+      tags:
+        - actions
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+      operationId: activate
+    parameters:
+      - schema:
+          type: string
+        name: regsiteredId
+        in: path
+        required: true
+        description: The registered ID of the beacon.
+  '/deactivate/{registeredId}':
+    post:
+      summary: Deactivates a BLE beacon.
+      tags:
+        - actions
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+      operationId: deactivate
+      description: ''
+    parameters:
+      - schema:
+          type: string
+        name: registeredId
+        in: path
+        required: true
+        description: The registered ID of the beacon.
+  '/beacons/{registeredId}/metadata':
+    get:
+      summary: Gets the metadata collection for a beacon.
+      tags:
+        - metadata
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: ../../models/ble/beaconmeta.v1.yaml
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+      operationId: metadata
+      requestBody: {}
+    post:
+      summary: Adds a metadata record to a beacon.
+      tags:
+        - metadata
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+      operationId: add metadata
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../../models/ble/beaconmeta.v1.yaml
+    parameters:
+      - schema:
+          type: string
+        name: registeredId
+        in: path
+        required: true
+        description: The registered ID of the beacon.
+  '/beacons/{registeredId}/metadata/{metaId}':
+    parameters:
+      - type: string
+        name: registeredId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The registered ID of the beacon.
+      - type: string
+        name: metaId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The metadata ID of the metadata record.
+    put:
+      summary: Changes a metadata record on a beacon.
+      tags:
+        - metadata
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+      operationId: change metadata
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../../models/ble/beaconmeta.v1.yaml
+    delete:
+      summary: Removes a metadata record from a beacon.
+      tags:
+        - metadata
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+components:
+  schemas: {}
+  securitySchemes: {}

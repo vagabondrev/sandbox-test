@@ -1,0 +1,32 @@
+title: subscriptionPage
+type: object
+properties:
+  contents:
+    type: array
+    items:
+      $ref: ./subscription.v1.yaml
+  next:
+    type: string
+    example: 'https://mock-api.zebra.com/...'
+    description: A link to the next page
+  previous:
+    type: string
+    example: 'https://mock-api.zebra.com/...'
+    description: A link to the previous page
+  pageOf:
+    type: string
+    example: 'https://mock-api.zebra.com/...'
+    description: A link to the list endpoint of the resource
+  type:
+    type: string
+    enum:
+      - Page
+  link:
+    type: string
+    example: 'https://mock-api.zebra.com/...'
+    description: A link to the current page
+required:
+  - contents
+  - pageOf
+  - type
+  - link

@@ -1,0 +1,16 @@
+title: beaconObservation
+type: object
+description: Represents an observed BLE beacon.
+properties:
+  advertisedId:
+    $ref: ./adversisedid.v1.yaml
+  telemetry:
+    type: string
+    description: The telemetry data from the beacon in base64 format.
+    format: byte
+  timestamp:
+    type: string
+    format: date-time
+    description: The time the beacon was observed.
+required:
+  - advertisedId

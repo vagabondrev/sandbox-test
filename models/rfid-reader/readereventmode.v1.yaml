@@ -1,0 +1,34 @@
+title: readerEventMode
+type: object
+properties:
+  EventMode:
+    type: string
+    enum:
+      - basic
+      - summaryBatch
+      - dwell
+      - transition
+  Settings:
+    type: object
+    properties:
+      RepeatReadInterval:
+        $ref: '#/components/schemas/readInterval'
+      Transition:
+        type: object
+        properties:
+          IngressLabel:
+            type: string
+            example: ABC123
+          EgressLabel:
+            type: string
+            example: ABC123
+          Directionality:
+            type: boolean
+            example: false
+      Dwell:
+        type: object
+        properties:
+          StartInterval:
+            $ref: '#/components/schemas/readInterval'
+          StopInterval:
+            $ref: '#/components/schemas/readInterval'

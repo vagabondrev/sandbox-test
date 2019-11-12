@@ -1,0 +1,30 @@
+title: cloudConfig
+type: object
+properties:
+  reader:
+    type: object
+    properties:
+      hostname:
+        type: string
+        example: ABC123
+      tagVisibleTimeout:
+        type: string
+        example: ABC123
+      tagStartsWith:
+        type: string
+        example: ABC123
+      latitude:
+        type: string
+        example: ABC123
+      longitude:
+        type: string
+        example: ABC123
+  commSettings:
+    type: object
+    properties:
+      edgeMicroGatewayAddress:
+        type: string
+        example: ABC123
+      proxyAddress:
+        type: string
+        example: ABC123

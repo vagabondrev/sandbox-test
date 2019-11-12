@@ -1,0 +1,17 @@
+title: antennaConfig
+type: object
+properties:
+  Antennas:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          example: ABC123
+        transmitPower:
+          type: object
+          properties:
+            level:
+              type: string
+              example: ABC123

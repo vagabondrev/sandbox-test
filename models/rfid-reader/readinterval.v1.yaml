@@ -1,0 +1,14 @@
+title: readInterval
+type: object
+properties:
+  interval:
+    type: integer
+    example: 0
+  unit:
+    type: string
+    enum:
+      - reads
+      - seconds
+      - minutes
+      - hours
+      - days
