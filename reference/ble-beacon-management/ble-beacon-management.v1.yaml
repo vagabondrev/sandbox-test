@@ -278,7 +278,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../../models/ble/beaconpage.v1.yaml
+                type: array
+                items:
+                  $ref: ../../models/ble/beaconmeta.v1.yaml
         '400':
           description: Bad Request
           content:
