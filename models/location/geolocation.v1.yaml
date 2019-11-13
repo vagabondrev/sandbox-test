@@ -3,5 +3,11 @@ type: object
 properties:
   lat:
     type: number
+    description: The latitude in degrees.minutes.seconds
+    example: '-90.234.567'
   lng:
     type: number
+    description: The longitude in degrees.minutes.seconds.
+required:
+  - lat
+  - lng

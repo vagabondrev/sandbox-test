@@ -1,30 +1,21 @@
 title: cloudConfig
 type: object
+description: Represents an RFID reader cloud configuration.
 properties:
-  reader:
-    type: object
-    properties:
-      hostname:
-        type: string
-        example: ABC123
-      tagVisibleTimeout:
-        type: string
-        example: ABC123
-      tagStartsWith:
-        type: string
-        example: ABC123
-      latitude:
-        type: string
-        example: ABC123
-      longitude:
-        type: string
-        example: ABC123
+  hostname:
+    type: string
+    description: The cloud hostname of the reader.
+    example: RIFID14E3D4F
   commSettings:
     type: object
     properties:
       edgeMicroGatewayAddress:
         type: string
-        example: ABC123
+        description: The IP address of the edge micro gateway.
+        example: 123.456.7.8
       proxyAddress:
         type: string
-        example: ABC123
+        description: The IP address for the proxy.
+        example: 234.567.8.9
+  location:
+    $ref: ../location/geolocation.v1.yaml

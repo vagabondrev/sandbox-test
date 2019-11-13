@@ -1,34 +1,6 @@
 title: readerEventMode
-type: object
-properties:
-  EventMode:
-    type: string
-    enum:
-      - basic
-      - summaryBatch
-      - dwell
-      - transition
-  Settings:
-    type: object
-    properties:
-      RepeatReadInterval:
-        $ref: ./readinterval.v1.yaml
-      Transition:
-        type: object
-        properties:
-          IngressLabel:
-            type: string
-            example: ABC123
-          EgressLabel:
-            type: string
-            example: ABC123
-          Directionality:
-            type: boolean
-            example: false
-      Dwell:
-        type: object
-        properties:
-          StartInterval:
-            $ref: ./readinterval.v1.yaml
-          StopInterval:
-            $ref: ./readinterval.v1.yaml
+description: Represents the RFID reader event mode settings.
+oneOf:
+  - $ref: ./basicmode.v1.yaml
+  - $ref: ./dwellmode.v1.yaml
+  - $ref: ./transitionmode.v1.yaml

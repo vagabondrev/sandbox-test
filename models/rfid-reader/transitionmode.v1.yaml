@@ -1,0 +1,34 @@
+title: transitionMode
+type: object
+properties:
+  eventMode:
+    type: string
+    default: transition
+    description: The event processing mode of the reader.
+    enum:
+      - transition
+    example: transition
+  ingressLabel:
+    type: string
+    description: The label for the ingress action.
+    example: ingress-front
+  egressLabel:
+    type: string
+    description: The label for the egress action.
+  trigger:
+    $ref: ./readinterval.v1.yaml
+  dirctionality:
+    type: boolean
+    default: true
+    description: A value indicating if directionality will be applied to events.
+    example: 'true'
+  irMotion:
+    type: boolean
+    default: false
+    description: A value indicating whether IR motion will be factored into events.
+    example: 'false'
+required:
+  - eventMode
+  - trigger
+  - dirctionality
+  - irMotion

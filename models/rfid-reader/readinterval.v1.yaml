@@ -3,7 +3,8 @@ type: object
 properties:
   interval:
     type: integer
-    example: 0
+    example: '10'
+    description: The numeric value for the interval.
   unit:
     type: string
     enum:
@@ -12,3 +13,5 @@ properties:
       - minutes
       - hours
       - days
+    example: seconds
+    description: The unit of the interval.

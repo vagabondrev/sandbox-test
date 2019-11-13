@@ -1,0 +1,17 @@
+title: basicMode
+description: ''
+type: object
+properties:
+  eventMode:
+    type: string
+    default: basicLast
+    description: The event processing mode of the reader.
+    enum:
+      - basicFirst
+      - basicLast
+      - basicSummary
+  readInterval:
+    $ref: ./readinterval.v1.yaml
+required:
+  - eventMode
+  - readInterval

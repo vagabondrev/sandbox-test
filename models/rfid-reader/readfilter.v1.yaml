@@ -1,11 +1,43 @@
 title: readFilter
 type: object
 properties:
-  Operation:
+  minRssi:
+    type: number
+    example: '-1234'
+    description: The minimum RSSI value for the filter.
+  maxRssi:
+    type: number
+    example: '1234'
+    description: The maximum RSSI value for the filter.
+  minReadTime:
+    $ref: ./readinterval.v1.yaml
+  minReads:
+    type: integer
+    example: '10'
+    description: The minimum number of reads for the filter.
+  session:
+    type: integer
+    enum:
+      - 0
+      - 0
+    example: '0'
+    minimum: 0
+    maximum: 3
+    description: The session value for the filter.
+  antenna:
+    type: integer
+    example: '0'
+    minimum: 0
+    maximum: 8
+    description: The antenna ID for the filter.
+  state:
     type: string
     enum:
-      - include
-      - exclude
-  FilterRegex:
-    type: string
-    example: ABC123
+      - A
+      - B
+    example: A
+    description: The reader state for the filter.
+  criteria:
+    type: array
+    items:
+      $ref: ./filtercriterion.v1.yaml
