@@ -302,6 +302,9 @@
         "responses": {
           "200": {
             "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/beacon"
+            },
             "headers": {}
           },
           "400": {
@@ -861,4 +864,4 @@
       "description": ""
     }
   ]
-}  
+}
