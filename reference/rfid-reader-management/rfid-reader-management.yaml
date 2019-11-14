@@ -588,7 +588,7 @@ paths:
     get:
       tags:
         - cloud settings
-      summary: Change reader configuration info.
+      summary: Change reader cloud configuration info.
       operationId: cloud settings
       description: Updates RFID reader configuration for the reader serial number provided.
       parameters:
@@ -620,7 +620,7 @@ paths:
     put:
       tags:
         - cloud settings
-      summary: Get reader configuration info.
+      summary: Get reader cloud configuration info.
       operationId: set cloud settings
       description: Retrieves RFID reader configuration for the reader serial number provided.
       parameters:
