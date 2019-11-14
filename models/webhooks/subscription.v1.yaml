@@ -39,6 +39,9 @@ properties:
     example: false
   config:
     type: object
+    properties:
+      '':
+        type: string
   updatedAt:
     type: string
     example: '2019-04-23T18:25:43.511Z'

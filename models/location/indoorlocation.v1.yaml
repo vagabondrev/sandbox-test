@@ -1,0 +1,15 @@
+title: indoorlocation
+type: object
+properties:
+  x:
+    type: number
+  'y':
+    type: number
+  z:
+    type: number
+  confidence:
+    type: number
+    minimum: 0
+    maximum: 1
+  geolocation:
+    $ref: ./geolocation.v1.yaml

@@ -8,6 +8,11 @@ properties:
   lng:
     type: number
     description: The longitude in degrees.minutes.seconds.
+  confidence:
+    type: number
+    example: '.90'
+    minimum: 0
+    maximum: 1
 required:
   - lat
   - lng

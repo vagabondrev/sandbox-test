@@ -19,16 +19,23 @@ properties:
     description: The filter operation.
   match:
     type: string
+    description: The matching method for the criterion.
     enum:
       - prefix
       - suffix
       - regex
+      - bytes
     example: regex
-    description: The matching method for the criterion.
   value:
     type: string
     example: '[a-zA-Z0-9]{2,}'
     description: The value to match.
+  memory:
+    type: string
+    enum:
+      - epc
+      - user
+      - tid
 required:
   - aggregate
   - operation
