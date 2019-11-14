@@ -24,6 +24,13 @@ properties:
     minimum: 0
     maximum: 3
     description: The session value for the filter.
+  memoryBank:
+    type: string
+    enum:
+      - epc
+      - user
+    example: 'epc'
+    description: The session value for the filter.
   antenna:
     type: integer
     example: '0'
