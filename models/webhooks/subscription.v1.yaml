@@ -5,46 +5,33 @@ properties:
     type: string
     example: 1e2bb36f-3ea5-419e-a1aa-83da82203af4
     default: 0
-  type:
-    type: string
-    enum:
-      - Subscription
-  link:
-    type: string
-    example: 'https://mock-api.zebra.com/...'
-  testLink:
-    type: string
-    example: 'https://mock-api.zebra.com/...'
-  pingLink:
-    type: string
-    example: 'https://mock-api.zebra.com/...'
   name:
     type: string
     example: My Subscription
+  link:
+    type: string
+    example: 'https://mock-api.zebra.com/...'
   authApiKey:
     type: string
     example: b61b5422-aa0e-44f8-bf91-7c699fd0528f
-  events:
-    type: array
-    items:
-      type: string
-      example: My Event
   devices:
     type: array
     items:
       type: string
       example: '[device s/n]'
-  active:
-    type: boolean
-    example: false
-  config:
-    type: object
-    properties:
-      '':
-        type: string
-  updatedAt:
+  tenant:
     type: string
-    example: '2019-04-23T18:25:43.511Z'
-  createdAt:
+  tag:
     type: string
-    example: '2019-04-23T18:25:43.511Z'
+  filters:
+    type: string
+  enrich:
+    type: string
+  enrichmentFilters:
+    type: string
+required:
+  - id
+  - name
+  - link
+  - authApiKey
+  - tenant
