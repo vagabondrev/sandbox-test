@@ -6,7 +6,7 @@ info:
   contact:
     name: Zebra Savanna
 servers:
-  - url: 'http://mock-api.zebra.com/v1/ble-beacon-to-cloud'
+  - url: 'https://mock-api.zebra.com/v1/ble-beacon-to-cloud'
 paths:
   /observed:
     post:
