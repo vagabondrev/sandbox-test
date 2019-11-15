@@ -839,4 +839,4 @@ paths:
                 $ref: ../../models/error.v1.yaml
 openapi: 3.0.0
 servers:
-  - url: 'https://mock-api.zebra.com/v1/rfid-reader-management'
+  - url: 'https://mock-api.zebra.com/v1/rfid-read-to-cloud'
