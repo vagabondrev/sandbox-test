@@ -1,0 +1,14 @@
+title: basicEvent
+type: object
+properties:
+  type:
+    type: string
+    enum:
+      - first
+      - last
+    description: The event type
+  data:
+    $ref: ./readdata.v1.yaml
+required:
+  - type
+  - data

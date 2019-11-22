@@ -1,0 +1,19 @@
+title: presenceMode
+type: object
+properties:
+  eventMode:
+    type: string
+    default: presence
+    description: The event processing mode of the reader.
+    enum:
+      - presence
+    example: presence
+  arrivalDelay:
+    $ref: ./readinterval.v1.yaml
+  exitDelay:
+    $ref: ./readinterval.v1.yaml
+required:
+  - eventMode
+  - arrivalDelay
+  - exitDelay
+description: 'Configures a reader for presence mode, (arrival/exit confirmation).'

@@ -5,8 +5,8 @@ info:
 tags:
   - name: actions
     description: Reader device commands
-  - name: gpio
-    description: General purpose input/output commands and subscriptions
+  - name: gpi
+    description: General purpose input webhook subscriptions
   - name: read settings
     description: RFID read configuration operations
   - name: device settings
@@ -16,20 +16,13 @@ tags:
   - name: device health
     description: Reader health status webhook subscriptions
 paths:
-  '/{readerSn}/actions/restart':
+  '/{deviceId}/restart':
     put:
       tags:
         - actions
       summary: Restart an RFID reader.
       operationId: restart reader
       description: Restarts the reader with the serial number provided.
-      parameters:
-        - in: path
-          name: readerSn
-          description: The RFID reader serial number
-          required: true
-          schema:
-            type: string
       responses:
         '202':
           description: OK
@@ -59,20 +52,21 @@ paths:
             application/json:
               schema:
                 $ref: ../../models/error.v1.yaml
-  '/{readerSn}/gpo':
+    parameters:
+      - schema:
+          type: string
+        name: deviceId
+        in: path
+        required: true
+        description: The device ID of the reader
+  '/{deviceId}/gpo':
     put:
       tags:
-        - gpio
+        - actions
       summary: Send a GPO signal to the reader.
       operationId: gpo signal
       description: Send a GPO signal to the specified port of the reader.
       parameters:
-        - in: path
-          name: readerSn
-          description: The RFID reader serial number
-          required: true
-          schema:
-            type: string
         - in: query
           name: port
           description: The GPO port ID
@@ -107,10 +101,17 @@ paths:
             application/json:
               schema:
                 $ref: ../../models/error.v1.yaml
+    parameters:
+      - schema:
+          type: string
+        name: deviceId
+        in: path
+        required: true
+        description: The device ID of the reader
   /gpi:
     get:
       tags:
-        - gpio
+        - gpi
       summary: Gets a list of reader GPI subscriptions that match the search criteria
       operationId: gpi subscriptions
       parameters:
@@ -141,7 +142,7 @@ paths:
                 $ref: ../../models/error.v1.yaml
     post:
       tags:
-        - gpio
+        - gpi
       summary: Creates a reader GPI subscription
       operationId: new gpi subscription
       responses:
@@ -178,10 +179,10 @@ paths:
               $ref: ../../models/webhooks/subscription.v1.yaml
         description: Details of the new subscription
         required: true
-  '/gpi/{id}':
+  '/gpi/{subscriptionId}':
     get:
       tags:
-        - gpio
+        - gpi
       summary: Gets a reader GPI subscription
       operationId: gpi subscription
       parameters:
@@ -212,7 +213,7 @@ paths:
                 $ref: ../../models/error.v1.yaml
     put:
       tags:
-        - gpio
+        - gpi
       summary: Changes a GPI subscription
       operationId: change gpi subscription
       parameters:
@@ -253,7 +254,7 @@ paths:
         description: The subscription data
     delete:
       tags:
-        - gpio
+        - gpi
       summary: Removes a reader GPI subscription
       operationId: remove gpi subscription
       parameters:
@@ -285,7 +286,14 @@ paths:
             application/json:
               schema:
                 $ref: ../../models/error.v1.yaml
-  '/{readerSn}/actions/led':
+    parameters:
+      - schema:
+          type: string
+        name: subscriptionId
+        in: path
+        required: true
+        description: The subscription ID
+  '/{deviceId}/led':
     put:
       tags:
         - actions
@@ -293,12 +301,6 @@ paths:
       operationId: led command
       description: Send an LED command to the specified reader.
       parameters:
-        - in: path
-          name: readerSn
-          description: The RFID reader serial number
-          required: true
-          schema:
-            type: string
         - in: query
           name: color
           description: 'The color of the LED (1 = red, 2 = yellow, 3 = green)'
@@ -339,19 +341,19 @@ paths:
             application/json:
               schema:
                 $ref: ../../models/error.v1.yaml
-  '/{readerSn}/eventmode':
+    parameters:
+      - schema:
+          type: string
+        name: deviceId
+        in: path
+        required: true
+        description: The device ID of the reader
+  '/{deviceId}/eventmode':
     put:
       tags:
         - read settings
       summary: Sets the read mode of the device.
       operationId: set event mode
-      parameters:
-        - in: path
-          name: readerSn
-          description: The RFID reader serial number
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: OK
@@ -381,7 +383,14 @@ paths:
               $ref: ../../models/rfid-reader/readereventmode.v1.yaml
         description: Details of the event mode
         required: true
-  '/{readerSn}/session/{sessionId}':
+    parameters:
+      - schema:
+          type: string
+        name: deviceId
+        in: path
+        required: true
+        description: The device ID of the reader
+  '/{deviceId}/session/{sessionId}':
     put:
       tags:
         - read settings
@@ -389,12 +398,6 @@ paths:
       operationId: set session configuration
       description: Sets the session configuration on the reader.
       parameters:
-        - in: path
-          name: readerSn
-          description: The RFID reader serial number
-          required: true
-          schema:
-            type: string
         - in: path
           name: sessionId
           description: 'The session configuration to apply (0, 1, 2, 3)'
@@ -423,19 +426,30 @@ paths:
             application/json:
               schema:
                 $ref: ../../models/error.v1.yaml
-  '/{readerSn}/filter':
+    parameters:
+      - schema:
+          type: string
+        name: deviceId
+        in: path
+        required: true
+        description: The device ID of the reader
+      - schema:
+          type: string
+          enum:
+            - '0'
+            - '1'
+            - '2'
+            - '3'
+        name: sessionId
+        in: path
+        required: true
+        description: 'The session setting for the reader (0, 1, 2, 3)'
+  '/{deviceId}/filter':
     put:
       tags:
         - read settings
       summary: Creates a read filter
       operationId: set read filter
-      parameters:
-        - in: path
-          name: readerSn
-          description: The RFID reader serial number
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: OK
@@ -463,19 +477,20 @@ paths:
           application/json:
             schema:
               $ref: ../../models/rfid-reader/readfilter.v1.yaml
-  '/{readerSn}/antenna/{antennaId}':
+    parameters:
+      - schema:
+          type: string
+        name: deviceId
+        in: path
+        required: true
+        description: The device ID of the reader
+  '/{deviceId}/antenna/{antennaId}':
     put:
       tags:
         - read settings
       summary: Configures a reader antenna
       operationId: set antenna configuration
       parameters:
-        - in: path
-          name: readerSn
-          description: The RFID reader serial number
-          required: true
-          schema:
-            type: string
         - in: path
           name: antennaId
           description: The antenna id number
@@ -509,20 +524,26 @@ paths:
           application/json:
             schema:
               $ref: ../../models/rfid-reader/antennaconfig.v1.yaml
-  '/{readerSn}/settings/device':
+    parameters:
+      - schema:
+          type: string
+        name: deviceId
+        in: path
+        required: true
+        description: The device ID of the reader
+      - schema:
+          type: string
+        name: antennaId
+        in: path
+        required: true
+        description: The antenna to configure
+  '/{deviceId}/settings/device':
     get:
       tags:
         - device settings
       summary: Change reader configuration info.
       operationId: device settings
       description: Updates RFID reader configuration for the reader serial number provided.
-      parameters:
-        - in: path
-          name: readerSn
-          description: The RFID reader serial number
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: OK
@@ -584,20 +605,20 @@ paths:
               $ref: ../../models/rfid-reader/readerconfig.v1.yaml
         description: Details of the reader configuration
         required: true
-  '/{readerSn}/settings/cloud':
+    parameters:
+      - schema:
+          type: string
+        name: deviceId
+        in: path
+        required: true
+        description: The device ID of the reader
+  '/{deviceId}/settings/cloud':
     get:
       tags:
         - cloud settings
       summary: Change reader cloud configuration info.
       operationId: cloud settings
       description: Updates RFID reader configuration for the reader serial number provided.
-      parameters:
-        - in: path
-          name: readerSn
-          description: The RFID reader serial number
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: OK
@@ -659,6 +680,13 @@ paths:
               $ref: ../../models/rfid-reader/cloudconfig.v1.yaml
         description: Details of the reader configuration
         required: true
+    parameters:
+      - schema:
+          type: string
+        name: deviceId
+        in: path
+        required: true
+        description: The device ID of the reader
   /health:
     get:
       tags:
@@ -730,7 +758,7 @@ paths:
               $ref: ../../models/webhooks/subscription.v1.yaml
         description: Details of the new subscription
         required: true
-  '/health/{id}':
+  '/health/{subscriptionId}':
     get:
       tags:
         - device health
@@ -837,6 +865,13 @@ paths:
             application/json:
               schema:
                 $ref: ../../models/error.v1.yaml
+    parameters:
+      - schema:
+          type: string
+        name: subscriptionId
+        in: path
+        required: true
+        description: The subscription ID
 openapi: 3.0.0
 servers:
   - url: 'https://mock-api.zebra.com/v1/rfid-read-to-cloud'

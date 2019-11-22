@@ -1,0 +1,41 @@
+title: summaryEvent
+type: object
+properties:
+  type:
+    type: string
+    default: summary
+    enum:
+      - summary
+    example: summary
+  interval:
+    $ref: ../readinterval.v1.yaml
+  summary:
+    type:
+      - string
+      - array
+    description: An array of summary data records
+    items:
+      type: object
+      properties:
+        tagId:
+          type: string
+          description: The tag ID
+        reads:
+          type: integer
+          description: The number of reads occuring in the summary interval
+        peakRssi:
+          type: number
+          description: The peak RSSI value for the summary interval
+        data:
+          type: array
+          description: The tag data
+          items:
+            $ref: ./readdata.v1.yaml
+      required:
+        - tagId
+        - reads
+        - peakRssi
+        - data
+required:
+  - type
+  - summary

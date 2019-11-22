@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: ble-beacon-management
+  title: BLE Beacon to Cloud
   version: '1.0'
   description: "API's for management of Bluetooth low-energy Beacons."
   contact:

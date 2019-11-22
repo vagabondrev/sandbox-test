@@ -1,0 +1,18 @@
+title: readData
+type: object
+properties:
+  bank:
+    type: string
+    default: epc
+    description: The tag memory bank
+    enum:
+      - epc
+      - tid
+      - user
+    example: epc
+  data:
+    type: string
+    description: The memory bank data in hex
+required:
+  - bank
+  - data

@@ -11,7 +11,7 @@ properties:
   link:
     type: string
     example: 'https://mock-api.zebra.com/...'
-  authApiKey:
+  apiKey:
     type: string
     example: b61b5422-aa0e-44f8-bf91-7c699fd0528f
   devices:
@@ -33,5 +33,5 @@ required:
   - id
   - name
   - link
-  - authApiKey
+  - apiKey
   - tenant

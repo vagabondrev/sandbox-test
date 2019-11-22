@@ -17,8 +17,7 @@ properties:
     minimum: 0
     maximum: 8
     description: The antenna ID for the filter.
-  criteria:
+  filters:
     type: array
-    description: The filter criteria to apply.
     items:
       $ref: ./filtercriterion.v1.yaml

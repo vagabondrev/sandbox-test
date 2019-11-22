@@ -15,7 +15,7 @@ properties:
   egressLabel:
     type: string
     description: The label for the egress action.
-  trigger:
+  transitionDelay:
     $ref: ./readinterval.v1.yaml
   dirctionality:
     type: boolean
@@ -29,6 +29,6 @@ properties:
     example: 'false'
 required:
   - eventMode
-  - trigger
+  - transitionDelay
   - dirctionality
   - irMotion

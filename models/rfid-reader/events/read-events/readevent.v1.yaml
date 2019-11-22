@@ -1,0 +1,29 @@
+title: readEvent
+type: object
+description: Represents read data sent to the cloud.
+properties:
+  deviceId:
+    type: string
+    description: The device ID of the reader
+  antennaId:
+    type: string
+    description: The antenna ID for the read
+  tenant:
+    type: string
+    description: The tenant of the reader
+  timestamp:
+    type: string
+    format: date-time
+    description: The date/time of the read
+  event:
+    oneOf:
+      - $ref: ./basicevent.v1.yaml
+      - $ref: ./summaryevent.v1.yaml
+      - $ref: ./presenceevent.v1.yaml
+      - $ref: ./transitionevent.v1.yaml
+    description: The read event
+required:
+  - deviceId
+  - antennaId
+  - tenant
+  - timestamp

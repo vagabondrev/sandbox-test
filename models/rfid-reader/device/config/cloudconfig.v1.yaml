@@ -23,12 +23,6 @@ properties:
       - $ref: ../location/geolocation.v1.yaml
       - $ref: ../location/indoorlocation.v1.yaml
     description: The location of the reader.
-  session:
-    type: integer
-    default: 0
-    minimum: 0
-    maximum: 3
-    description: The session setting for the reader.
   state:
     type: string
     enum:
@@ -36,10 +30,6 @@ properties:
       - b
     example: a
     description: The EPC Gen 2 state setting for the reader.
-  eventMode:
-    $ref: ./readereventmode.v1.yaml
-  antennas:
-    $ref: ./antennaconfig.v1.yaml
   memory:
     type: array
     default: epc
@@ -53,8 +43,5 @@ properties:
       type: string
 required:
   - hostname
-  - session
   - state
-  - eventMode
-  - antennas
   - memory
