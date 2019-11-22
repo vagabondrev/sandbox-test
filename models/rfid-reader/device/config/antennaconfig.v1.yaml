@@ -20,12 +20,18 @@ properties:
           maximum: 30
         name:
           type: string
-        tags:
-          type: array
-          items:
-            type: string
+          description: The name of the reader
+        session:
+          type: integer
+          default: 0
+          example: '0'
+          minimum: 0
+          maximum: 3
+          description: 'The session configuration to apply (0, 1, 2, 3)'
       required:
         - id
         - transmitPower
+        - name
+        - session
 required:
   - Antennas

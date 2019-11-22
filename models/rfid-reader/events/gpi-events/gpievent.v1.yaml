@@ -1,0 +1,20 @@
+title: gpiEvent
+type: object
+properties:
+  deviceId:
+    type: string
+  port:
+    type: integer
+  signal:
+    type: string
+    enum:
+      - HIGH
+      - LOW
+  timestamp:
+    type: string
+    format: date-time
+required:
+  - deviceId
+  - port
+  - signal
+  - timestamp

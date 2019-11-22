@@ -380,7 +380,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../../models/rfid-reader/readereventmode.v1.yaml
+              $ref: ../../models/rfid-reader/device/event-modes/readereventmode.v1.yaml
         description: Details of the event mode
         required: true
     parameters:
@@ -390,60 +390,6 @@ paths:
         in: path
         required: true
         description: The device ID of the reader
-  '/{deviceId}/session/{sessionId}':
-    put:
-      tags:
-        - read settings
-      summary: Set the session configuration on the reader.
-      operationId: set session configuration
-      description: Sets the session configuration on the reader.
-      parameters:
-        - in: path
-          name: sessionId
-          description: 'The session configuration to apply (0, 1, 2, 3)'
-          required: true
-          schema:
-            type: integer
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                description: Command Successful
-                type: string
-                default: Command Successful
-                example: Command Successful
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: ../../models/error.v1.yaml
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: ../../models/error.v1.yaml
-    parameters:
-      - schema:
-          type: string
-        name: deviceId
-        in: path
-        required: true
-        description: The device ID of the reader
-      - schema:
-          type: string
-          enum:
-            - '0'
-            - '1'
-            - '2'
-            - '3'
-        name: sessionId
-        in: path
-        required: true
-        description: 'The session setting for the reader (0, 1, 2, 3)'
   '/{deviceId}/filter':
     put:
       tags:
@@ -476,7 +422,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../../models/rfid-reader/readfilter.v1.yaml
+              $ref: ../../models/rfid-reader/filters/readfilter.v1.yaml
     parameters:
       - schema:
           type: string
@@ -523,7 +469,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../../models/rfid-reader/antennaconfig.v1.yaml
+              $ref: ../../models/rfid-reader/device/config/antennaconfig.v1.yaml
     parameters:
       - schema:
           type: string
@@ -550,7 +496,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../../models/rfid-reader/readerconfig.v1.yaml
+                $ref: ../../models/rfid-reader/device/config/readerconfig.v1.yaml
         '400':
           description: Bad Request
           content:
@@ -602,7 +548,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../../models/rfid-reader/readerconfig.v1.yaml
+              $ref: ../../models/rfid-reader/device/config/readerconfig.v1.yaml
         description: Details of the reader configuration
         required: true
     parameters:
@@ -625,7 +571,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../../models/rfid-reader/cloudconfig.v1.yaml
+                $ref: ../../models/rfid-reader/device/config/cloudconfig.v1.yaml
         '400':
           description: Bad Request
           content:
@@ -677,7 +623,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../../models/rfid-reader/cloudconfig.v1.yaml
+              $ref: ../../models/rfid-reader/device/config/cloudconfig.v1.yaml
         description: Details of the reader configuration
         required: true
     parameters:
