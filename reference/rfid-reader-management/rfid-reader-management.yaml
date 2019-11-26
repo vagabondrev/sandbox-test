@@ -501,6 +501,8 @@ paths:
         description: Details of the reader configuration
         required: true
     patch:
+      tags:
+        - device settings
       summary: ''
       responses:
         '200':
