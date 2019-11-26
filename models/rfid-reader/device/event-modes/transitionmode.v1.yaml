@@ -16,7 +16,7 @@ properties:
     type: string
     description: The label for the egress action.
   transitionDelay:
-    $ref: ./readinterval.v1.yaml
+    $ref: ../readinterval.v1.yaml
   dirctionality:
     type: boolean
     default: true

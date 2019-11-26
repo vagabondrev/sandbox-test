@@ -2,5 +2,5 @@ title: readerEventMode
 description: Represents the RFID reader event mode settings.
 oneOf:
   - $ref: ./basicmode.v1.yaml
-  - $ref: ./dwellmode.v1.yaml
+  - $ref: ./presencemode.v1.yaml
   - $ref: ./transitionmode.v1.yaml

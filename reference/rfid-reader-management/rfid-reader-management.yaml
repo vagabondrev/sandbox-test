@@ -185,13 +185,6 @@ paths:
         - gpi
       summary: Gets a reader GPI subscription
       operationId: gpi subscription
-      parameters:
-        - in: path
-          name: id
-          description: The subscription ID
-          required: true
-          schema:
-            type: integer
       responses:
         '200':
           description: OK
@@ -216,13 +209,6 @@ paths:
         - gpi
       summary: Changes a GPI subscription
       operationId: change gpi subscription
-      parameters:
-        - in: path
-          name: id
-          description: The subscription ID
-          required: true
-          schema:
-            type: integer
       responses:
         '200':
           description: OK
@@ -257,13 +243,6 @@ paths:
         - gpi
       summary: Removes a reader GPI subscription
       operationId: remove gpi subscription
-      parameters:
-        - in: path
-          name: id
-          description: The subscription ID
-          required: true
-          schema:
-            type: integer
       responses:
         '200':
           description: OK
@@ -293,61 +272,6 @@ paths:
         in: path
         required: true
         description: The subscription ID
-  '/{deviceId}/led':
-    put:
-      tags:
-        - actions
-      summary: Send an LED command to the reader.
-      operationId: led command
-      description: Send an LED command to the specified reader.
-      parameters:
-        - in: query
-          name: color
-          description: 'The color of the LED (1 = red, 2 = yellow, 3 = green)'
-          required: true
-          schema:
-            type: integer
-        - in: query
-          name: seconds
-          description: The time to change the LED color in seconds
-          required: true
-          schema:
-            type: integer
-        - in: query
-          name: flash
-          description: A value indicating whether to flash the LED
-          required: false
-          schema:
-            type: boolean
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                description: Command Successful
-                type: string
-                default: Command Successful
-                example: Command Successful
-        '400':
-          description: Bad Request
-          content:
-            application/json:
-              schema:
-                $ref: ../../models/error.v1.yaml
-        '500':
-          description: Internal Server Error
-          content:
-            application/json:
-              schema:
-                $ref: ../../models/error.v1.yaml
-    parameters:
-      - schema:
-          type: string
-        name: deviceId
-        in: path
-        required: true
-        description: The device ID of the reader
   '/{deviceId}/eventmode':
     put:
       tags:
@@ -430,12 +354,12 @@ paths:
         in: path
         required: true
         description: The device ID of the reader
-  '/{deviceId}/antenna/{antennaId}':
+  '/{deviceId}/antennas':
     put:
       tags:
         - read settings
       summary: Configures a reader antenna
-      operationId: set antenna configuration
+      operationId: antennas configuration
       parameters:
         - in: path
           name: antennaId
@@ -477,19 +401,55 @@ paths:
         in: path
         required: true
         description: The device ID of the reader
-      - schema:
-          type: string
+  '/{deviceId}/antennas/{antennaId}':
+    parameters:
+      - type: string
+        name: deviceId
+        in: path
+        required: true
+      - type: string
         name: antennaId
         in: path
         required: true
-        description: The antenna to configure
+    put:
+      summary: Changes an antenna configuration
+      tags:
+        - read settings
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                description: Change Successful
+                type: string
+                default: Change Successful
+                example: Change Successful
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+      operationId: antenna configuration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../../models/rfid-reader/device/config/antenna.v1.yaml
   '/{deviceId}/settings/device':
     get:
       tags:
         - device settings
       summary: Change reader configuration info.
       operationId: device settings
-      description: Updates RFID reader configuration for the reader serial number provided.
+      description: Retrieves RFID reader configuration for the reader.
       responses:
         '200':
           description: OK
@@ -514,7 +474,7 @@ paths:
         - device settings
       summary: Get reader configuration info.
       operationId: set device settings
-      description: Retrieves RFID reader configuration for the reader serial number provided.
+      description: Sets RFID reader configuration for the reader.
       parameters:
         - in: path
           name: readerSn
@@ -558,6 +518,38 @@ paths:
         in: path
         required: true
         description: The device ID of the reader
+    patch:
+      summary: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: Change Successful
+                type: string
+                default: Change Successful
+                example: Change Successful
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+      description: Changes RFID reader configuration for the reader.
+      operationId: change device settings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../../models/rfid-reader/device/config/readerconfig.v1.yaml
+        description: Details of the reader configuration
   '/{deviceId}/settings/cloud':
     get:
       tags:
@@ -741,13 +733,6 @@ paths:
         - device health
       summary: Changes a reader health event subscription
       operationId: change health subscription
-      parameters:
-        - in: path
-          name: id
-          description: The subscription ID
-          required: true
-          schema:
-            type: integer
       responses:
         '200':
           description: OK
@@ -782,13 +767,6 @@ paths:
         - device health
       summary: Removes a reader health event subscription
       operationId: remove health subscription
-      parameters:
-        - in: path
-          name: id
-          description: The subscription ID
-          required: true
-          schema:
-            type: integer
       responses:
         '200':
           description: OK

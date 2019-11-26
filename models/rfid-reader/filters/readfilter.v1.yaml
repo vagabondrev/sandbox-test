@@ -10,7 +10,7 @@ properties:
     example: '1234'
     description: The maximum RSSI value for the filter.
   minReadInterval:
-    $ref: ./readinterval.v1.yaml
+    $ref: ../device/readinterval.v1.yaml
   antenna:
     type: integer
     example: '0'

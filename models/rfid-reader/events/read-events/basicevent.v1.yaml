@@ -8,7 +8,9 @@ properties:
       - last
     description: The event type
   data:
-    $ref: ./readdata.v1.yaml
+    type: array
+    items:
+      $ref: ../readdata.v1.yaml
 required:
   - type
   - data

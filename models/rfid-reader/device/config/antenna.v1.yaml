@@ -1,0 +1,24 @@
+title: antenna
+type: object
+properties:
+  id:
+    type: string
+    description: The antenna ID.
+    example: '0'
+  transmitPower:
+    type: number
+    description: The configured antenna transmit power level.
+    example: '10'
+    minimum: 10
+    maximum: 30
+  session:
+    type: integer
+    default: 0
+    example: '0'
+    minimum: 0
+    maximum: 3
+    description: 'The session configuration to apply (0, 1, 2, 3)'
+required:
+  - id
+  - transmitPower
+  - session

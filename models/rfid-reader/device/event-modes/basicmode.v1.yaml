@@ -11,7 +11,7 @@ properties:
       - basicLast
       - basicSummary
   readInterval:
-    $ref: ./readinterval.v1.yaml
+    $ref: ../readinterval.v1.yaml
 required:
   - eventMode
   - readInterval

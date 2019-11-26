@@ -8,7 +8,7 @@ properties:
       - summary
     example: summary
   interval:
-    $ref: ../readinterval.v1.yaml
+    $ref: ../../device/readinterval.v1.yaml
   summary:
     type:
       - string

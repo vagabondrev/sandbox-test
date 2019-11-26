@@ -1,5 +1,6 @@
 title: presenceMode
 type: object
+description: 'Configures a reader for presence mode, (arrival/exit confirmation).'
 properties:
   eventMode:
     type: string
@@ -9,11 +10,10 @@ properties:
       - presence
     example: presence
   arrivalDelay:
-    $ref: ./readinterval.v1.yaml
+    $ref: ../readinterval.v1.yaml
   exitDelay:
-    $ref: ./readinterval.v1.yaml
+    $ref: ../readinterval.v1.yaml
 required:
   - eventMode
   - arrivalDelay
   - exitDelay
-description: 'Configures a reader for presence mode, (arrival/exit confirmation).'
