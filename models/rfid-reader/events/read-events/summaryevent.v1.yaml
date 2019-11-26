@@ -30,7 +30,7 @@ properties:
           type: array
           description: The tag data
           items:
-            $ref: ./readdata.v1.yaml
+            $ref: ../readdata.v1.yaml
       required:
         - tagId
         - reads

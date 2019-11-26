@@ -21,9 +21,9 @@ properties:
   data:
     type: array
     items:
-      $ref: ./readdata.v1.yaml
+      $ref: ../readdata.v1.yaml
 required:
   - type
   - action
-  - data
   - confidence
+  - data

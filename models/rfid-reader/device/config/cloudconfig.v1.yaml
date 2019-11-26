@@ -20,8 +20,8 @@ properties:
         example: 234.567.8.9
   location:
     oneOf:
-      - $ref: ../location/geolocation.v1.yaml
-      - $ref: ../location/indoorlocation.v1.yaml
+      - $ref: ../../../location/geolocation.v1.yaml
+      - $ref: ../../../location/geolocation.v1.yaml
     description: The location of the reader.
   state:
     type: string

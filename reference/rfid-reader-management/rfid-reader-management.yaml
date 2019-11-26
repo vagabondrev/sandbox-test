@@ -21,7 +21,7 @@ paths:
       tags:
         - actions
       summary: Restart an RFID reader.
-      operationId: restart reader
+      operationId: restart-reader
       description: Restarts the reader with the serial number provided.
       responses:
         '202':
@@ -113,7 +113,7 @@ paths:
       tags:
         - gpi
       summary: Gets a list of reader GPI subscriptions that match the search criteria
-      operationId: gpi subscriptions
+      operationId: gpi-subscriptions
       parameters:
         - name: search_criteria
           in: query
@@ -140,6 +140,7 @@ paths:
             application/json:
               schema:
                 $ref: ../../models/error.v1.yaml
+      description: Retrieve GPI subscriptions
     post:
       tags:
         - gpi
@@ -360,13 +361,6 @@ paths:
         - read settings
       summary: Configures a reader antenna
       operationId: antennas configuration
-      parameters:
-        - in: path
-          name: antennaId
-          description: The antenna id number
-          required: true
-          schema:
-            type: integer
       responses:
         '200':
           description: OK
@@ -403,11 +397,13 @@ paths:
         description: The device ID of the reader
   '/{deviceId}/antennas/{antennaId}':
     parameters:
-      - type: string
+      - schema:
+          type: string
         name: deviceId
         in: path
         required: true
-      - type: string
+      - schema:
+          type: string
         name: antennaId
         in: path
         required: true
@@ -475,13 +471,6 @@ paths:
       summary: Get reader configuration info.
       operationId: set device settings
       description: Sets RFID reader configuration for the reader.
-      parameters:
-        - in: path
-          name: readerSn
-          description: The RFID reader serial number
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: OK
@@ -511,13 +500,6 @@ paths:
               $ref: ../../models/rfid-reader/device/config/readerconfig.v1.yaml
         description: Details of the reader configuration
         required: true
-    parameters:
-      - schema:
-          type: string
-        name: deviceId
-        in: path
-        required: true
-        description: The device ID of the reader
     patch:
       summary: ''
       responses:
@@ -550,6 +532,13 @@ paths:
             schema:
               $ref: ../../models/rfid-reader/device/config/readerconfig.v1.yaml
         description: Details of the reader configuration
+    parameters:
+      - schema:
+          type: string
+        name: deviceId
+        in: path
+        required: true
+        description: The device ID of the reader
   '/{deviceId}/settings/cloud':
     get:
       tags:
@@ -582,13 +571,6 @@ paths:
       summary: Get reader cloud configuration info.
       operationId: set cloud settings
       description: Retrieves RFID reader configuration for the reader serial number provided.
-      parameters:
-        - in: path
-          name: readerSn
-          description: The RFID reader serial number
-          required: true
-          schema:
-            type: string
       responses:
         '200':
           description: OK
@@ -702,13 +684,6 @@ paths:
         - device health
       summary: Gets a reader health event subscription
       operationId: health subscription
-      parameters:
-        - in: path
-          name: id
-          description: The subscription ID
-          required: true
-          schema:
-            type: integer
       responses:
         '200':
           description: OK
