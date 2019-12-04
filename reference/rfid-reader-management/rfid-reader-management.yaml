@@ -443,7 +443,7 @@ paths:
     get:
       tags:
         - device settings
-      summary: Change reader configuration info.
+      summary: Retrieve reader configuration info.
       operationId: device settings
       description: Retrieves RFID reader configuration for the reader.
       responses:
@@ -468,9 +468,9 @@ paths:
     put:
       tags:
         - device settings
-      summary: Get reader configuration info.
+      summary: Change reader configuration info.
       operationId: set device settings
-      description: Sets RFID reader configuration for the reader.
+      description: Changes RFID reader configuration for the reader.
       responses:
         '200':
           description: OK
@@ -503,7 +503,7 @@ paths:
     patch:
       tags:
         - device settings
-      summary: ''
+      summary: Update reader configuration info.
       responses:
         '200':
           description: OK
@@ -526,7 +526,7 @@ paths:
             application/json:
               schema:
                 $ref: ../../models/error.v1.yaml
-      description: Changes RFID reader configuration for the reader.
+      description: Updates RFID reader configuration for the reader.
       operationId: change device settings
       requestBody:
         content:
@@ -545,7 +545,7 @@ paths:
     get:
       tags:
         - cloud settings
-      summary: Change reader cloud configuration info.
+      summary: Retrieve reader cloud configuration info.
       operationId: cloud settings
       description: Updates RFID reader configuration for the reader serial number provided.
       responses:
@@ -570,7 +570,7 @@ paths:
     put:
       tags:
         - cloud settings
-      summary: Get reader cloud configuration info.
+      summary: Change reader cloud configuration info.
       operationId: set cloud settings
       description: Retrieves RFID reader configuration for the reader serial number provided.
       responses:
@@ -773,6 +773,97 @@ paths:
         in: path
         required: true
         description: The subscription ID
+  '/{deviceId}/led':
+    put:
+      tags:
+        - actions
+      summary: Send an LED command to the reader.
+      operationId: led command
+      description: Send an LED command to the specified reader.
+      parameters:
+        - in: query
+          name: color
+          description: 'The color of the LED (1 = red, 2 = yellow, 3 = green)'
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: seconds
+          description: The time to change the LED color in seconds
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: flash
+          description: A value indicating whether to flash the LED
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: Command Successful
+                type: string
+                default: Command Successful
+                example: Command Successful
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+    parameters:
+      - schema:
+          type: string
+        name: deviceId
+        in: path
+        required: true
+        description: The device ID of the reader
+  '/{deviceId}/led/reset':
+    put:
+      summary: Resets the device LED to the default setting
+      tags:
+        - actions
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                description: Delete Successful
+                type: string
+                default: Delete Successful
+                example: Delete Successful
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: ../../models/error.v1.yaml
+      operationId: reset led
+      description: Resets the reader LED to the default setting
+    parameters:
+      - schema:
+          type: string
+        name: deviceId
+        in: path
+        required: true
+        description: The device ID of the reader
 openapi: 3.0.0
 servers:
   - url: 'https://mock-api.zebra.com/v1/rfid-read-to-cloud'
