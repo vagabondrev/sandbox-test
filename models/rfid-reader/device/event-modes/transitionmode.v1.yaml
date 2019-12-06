@@ -17,7 +17,7 @@ properties:
     description: The label for the egress action.
   transitionDelay:
     $ref: ../readinterval.v1.yaml
-  dirctionality:
+  directionality:
     type: boolean
     default: true
     description: A value indicating if directionality will be applied to events.
@@ -30,5 +30,5 @@ properties:
 required:
   - eventMode
   - transitionDelay
-  - dirctionality
+  - directionality
   - irMotion
